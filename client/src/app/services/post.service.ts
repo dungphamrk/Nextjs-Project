@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { PostCard } from '../interfaces/types'; // Import interface Post (nếu có)
 
-const API_URL = 'http://localhost:3000/Posts'; // Thay đổi URL API của bạn tại đây
+const API_URL = 'http://localhost:5000/posts'; // Thay đổi URL API của bạn tại đây
 
 export const PostService = {
   async getAllPost(): Promise<PostCard> {

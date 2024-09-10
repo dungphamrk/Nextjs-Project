@@ -5,15 +5,47 @@ import { useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faSearch, faCompass, faVideo, faEnvelope, faBell, faPlusCircle, faGear, faClockRotateLeft, faBookmark, faMoon, faExclamationTriangle, faUserCircle, faSignOut, faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
+import PhotoModal from './modal/PhotoModal';
+import { User } from '../interfaces/types';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllUser, UserState } from '../store/reducers/userSlice';
+import { getAllPost } from '../store/reducers/postsSlice';
+import { json } from 'stream/consumers';
 
 const SideNavbar = () => {
   const router = useRouter();
   const [activeNavBar, setActiveNavBar] = useState<string | undefined>(undefined);
   const [isMoreModalOpen, setIsMoreModalOpen] = useState(true);
   const [isNavBarCollapsed, setIsNavBarCollapsed] = useState(false);
+  const [currentUser, setCurrentUser] = useState<User | undefined>(undefined);
+  const dispatch = useDispatch();
+  const users = useSelector((state: { users: UserState }) => state.users.users);
+  const [isOpenModal,setIsOpenModal]= useState(false);
+  const openModal =()=>{
+      setIsOpenModal(true);
+  }
+  
+  //dispatch
+  useEffect(()=>{
+    dispatch(getAllUser());
+  },[users])
+  // Lấy dữ liệu về currentUser 
+  
+  useEffect(() => {
+    // Lấy dữ liệu từ local storage
+    const userId = localStorage.getItem("currentUserId");
+    
+    // Parse dữ liệu từ chuỗi JSON sang đối tượng JavaScript (nếu có)
+if (userId) {
+      const findId = (JSON.parse(userId));
+        const findedUser =users.find((user)=>user?.id==findId)
+        setCurrentUser(findedUser);
+    }
+  }, [users]);
+  
 
   // Sample user data (replace with actual user data)
-  const userProfileImg = 'https://avatars.githubusercontent.com/u/83784102?v=4';
+  const userProfileImg = `${currentUser?.avatar}`;
 
   const collapsedHiddenRoutes = ['/direct'];
 
@@ -37,7 +69,7 @@ const SideNavbar = () => {
     { title: 'Messages', path: '/direct', name: 'direct', icon: faEnvelope },
     { title: 'Notifications', path: '/notifications', name: 'notifications', icon: faBell },
     { title: 'Create', path: '/create', name: 'create', icon: faPlusCircle, onClick: () => triggerPhotoModal() },
-    { title: 'Profile', path: `/profile`, name: 'profile', img: userProfileImg },
+    { title: 'Profile', path: `/user/profile`, name: 'profile', img: userProfileImg },
   ];
 
   const settings = [
@@ -57,7 +89,7 @@ const SideNavbar = () => {
   const logout = () => {
     console.log('Logout successful');
     setTimeout(() => {
-      router.push('/accounts/login');
+      router.push('/login');
     }, 2000);
   };
 
@@ -99,7 +131,7 @@ const SideNavbar = () => {
           ))}
         </div>
       </div>
-
+      <PhotoModal onClose={openModal} isOpen={isOpenModal}/>
       {/* More Settings */}
       <div onClick={toggleMoreModal} className="cursor-pointer rounded-full flex space-x-4 p-5 sm:hover:bg-slate-1000 sm:hover:delay-100">
         <FontAwesomeIcon icon={faEllipsisH} />

@@ -1,17 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import producstReducer from "./reducers/postsSlice";
+import postsReducer from "./reducers/postsSlice";
 import userReducer from "./reducers/userSlice";
-import categoriesSlice from "./reducers/categoriesSlice";
-import cartReducer from "./reducers/cartSlice";
-import orderSlice from "./reducers/orderSlice";
 
 const store: any = configureStore({
   reducer: {
-    products: producstReducer,
+    posts: postsReducer,
     users: userReducer,
-    categories: categoriesSlice,
-    cart: cartReducer,
-    orders: orderSlice,
   },
 });
 export default store;

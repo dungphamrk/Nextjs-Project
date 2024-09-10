@@ -10,7 +10,6 @@ export default function SignIn() {
   const allUsers = useSelector((state: any) => state.users.users);
   const dispatch = useDispatch();
   const router = useRouter();
-
   const [account, setAccount] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
@@ -34,7 +33,7 @@ export default function SignIn() {
     });
 
     if (user) {
-      localStorage.setItem("currentUser", JSON.stringify(user));
+      localStorage.setItem("currentUserId", JSON.stringify(user.id));
 
       router.push("/home");
       location.reload();

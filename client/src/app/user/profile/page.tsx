@@ -1,13 +1,52 @@
+"use client";
+import { PostCard, User } from "@/app/interfaces/types";
+import { getAllPost, PostState } from "@/app/store/reducers/postsSlice";
+import { getAllUser, UserState } from "@/app/store/reducers/userSlice";
 import {
   faBookmark,
-  faFileLines,
+  faComment,
+  faHeart,
   faTableCells,
-  faTag,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-export default function page() {
+export default function Page() {
+  const users = useSelector((state: { users: UserState }) => state.users.users);
+  const posts = useSelector((state: { posts: PostState }) => state.posts.Posts);
+
+  const [currentUser, setCurrentUser] = useState<User | undefined>(undefined);
+  const [activeTab, setActiveTab] = useState<"POSTS" | "SAVED">("POSTS");
+  const dispatch = useDispatch();
+
+  // Dispatch to get all users and posts
+  useEffect(() => {
+    dispatch(getAllUser());
+    dispatch(getAllPost());
+  }, [dispatch]);
+
+  // Get current user data from local storage and find the user from the state
+  useEffect(() => {
+    const userId = localStorage.getItem("currentUserId");
+    if (userId) {
+      const findId = JSON.parse(userId);
+      const findedUser = users.find((user) => user?.id === findId);
+      setCurrentUser(findedUser);
+    }
+  }, [users]);
+
+  // Posts of current user
+  const postOfUser = posts.filter((post) => post.idUser === currentUser?.id);
+
+  // Saved posts of current user based on savedPost array
+  const savedPosts = posts.filter((post) =>
+    currentUser?.savedPost.includes(post.id)
+  );
+
+  // Render posts based on activeTab
+  const displayedPosts = activeTab === "POSTS" ? postOfUser : savedPosts;
+
   return (
     <div>
       <div className="lg:max-w-4xl h-screen sm:h-auto w-full mx-auto sm:mt-10 text-center">
@@ -16,7 +55,10 @@ export default function page() {
             {/* User Profile image */}
             <div>
               <img
-                src="https://static2.yan.vn/YanNews/2167221/202102/facebook-cap-nhat-avatar-doi-voi-tai-khoan-khong-su-dung-anh-dai-dien-e4abd14d.jpg"
+                src={
+                  currentUser?.avatar || 
+                  "https://static2.yan.vn/YanNews/2167221/202102/facebook-cap-nhat-avatar-doi-voi-tai-khoan-khong-su-dung-anh-dai-dien-e4abd14d.jpg"
+                }
                 className="md:w-36 md:h-36 h-20 w-20 rounded-full ml-9"
                 alt="User Profile"
               />
@@ -26,23 +68,21 @@ export default function page() {
               <div className="md:flex md:flex-row flex-col md:space-x-4 space-y-3 items-center">
                 {/* User name */}
                 <div className="md:pl-0 font-sans text-lg font-normal text-white text-left md:mt-4">
-                  BrainFuckUser
+                  {currentUser?.userName || "BrainFuckUser"}
                 </div>
                 <div className="flex flex-row space-x-6">
                   {/* Personal logged-in user Options */}
                   <div className="md:pl-0">
                     <button className="font-medium text-center text-white focus:outline focus:outline-2 transition-all border ease-in duration-150 disabled:cursor-not-allowed disabled:border-0 w-full relative py-2 px-3 text-xs rounded-lg bg-[#363636] text-white hover:text-white hover:bg-gray-800 border-none disabled:bg-gray-500 disabled:text-white focus:outline-none">
                       <span className="lg:text-md text-sm font-semibold">
-                        {" "}
-                        Edit Profile{" "}
+                        Edit Profile
                       </span>
                     </button>
                   </div>
                   <div className="md:pl-0">
                     <button className="font-medium text-center text-white focus:outline focus:outline-2 transition-all border ease-in duration-150 disabled:cursor-not-allowed disabled:border-0 w-full relative py-2 px-3 text-xs rounded-lg bg-[#363636] text-white hover:text-white hover:bg-gray-800 border-none disabled:bg-gray-500 disabled:text-white focus:outline-none">
                       <span className="sm:text-md text-sm font-semibold">
-                        {" "}
-                        View Archive{" "}
+                        View Archive
                       </span>
                     </button>
                   </div>
@@ -54,19 +94,13 @@ export default function page() {
                 <div className="flex space-x-10">
                   <div className="font-sans text-md font-normal text-white sm:hover:cursor-pointer">
                     <span className="font-sans text-sm font-bold text-white">
-                      40
-                    </span>{" "}
-                    posts
-                  </div>
-                  <div className="font-sans text-md font-normal text-white sm:hover:cursor-pointer">
-                    <span className="font-sans text-sm font-bold text-white">
-                      791
+                      {currentUser?.follows.length || 0}
                     </span>{" "}
                     followers
                   </div>
                   <div className="font-sans text-md font-normal text-white sm:hover:cursor-pointer">
                     <span className="font-sans text-sm font-bold text-white">
-                      637
+                      {currentUser?.friends.length || 0}
                     </span>{" "}
                     following
                   </div>
@@ -75,102 +109,58 @@ export default function page() {
             </div>
           </div>
 
-          {/* thanh điều hướng*/}
-          <div className="text-center border-t border-slate-1100">
+          {/* Navigation Tabs */}
+          <div className="text-center border-t border-[#383838] border-slate-1100">
             <ul className="flex sm:space-x-14 flex-wrap -mb-px md:justify-center justify-between sm:px-6">
-              {/* Posts Tab */}
               <li className="sm:hover:cursor-pointer">
-                <div className="flex items-center space-x-2 inline-block py-4 p-1 border-t-2 border-gray-300 sm:hover:border-gray-300 text-white">
-                  <span className="md:block hidden">
-                    <FontAwesomeIcon icon={faTableCells} size="sm" />
-                  </span>
-                  <span className="md:hidden block">
-                    <FontAwesomeIcon icon={faTableCells} size="lg" />
-                  </span>
-                  <span className="text-xs subpixel-antialiased hidden md:block">
-                    POSTS
-                  </span>
+                <div
+                  className={`flex items-center space-x-2 inline-block py-4 p-1 border-t-2 ${
+                    activeTab === "POSTS" ? "border-gray-300 text-white" : "border-transparent text-gray-300"
+                  }`}
+                  onClick={() => setActiveTab("POSTS")}
+                >
+                  <FontAwesomeIcon icon={faTableCells} size="sm" />
+                  <span className="text-xs subpixel-antialiased hidden md:block">POSTS</span>
                 </div>
               </li>
-
-              {/* Feed Tab */}
-              <li className="sm:hover:cursor-pointer md:hidden block">
-                <div className="flex items-center space-x-2 inline-block py-4 p-1 border-t-2 border-gray-300 sm:hover:border-gray-300 border-transparent text-gray-200">
-                  <span className="md:hidden block">
-                    <FontAwesomeIcon icon={faFileLines} size="lg" />
-                  </span>
-                  <span className="text-xs subpixel-antialiased hidden md:block">
-                    FEED
-                  </span>
-                </div>
-              </li>
-
-              {/* Saved Tab */}
               <li className="sm:hover:cursor-pointer">
-                <div className="flex items-center space-x-2 inline-block py-4 p-1 border-t-2 border-gray-300 sm:hover:border-gray-300 border-transparent text-gray-300 sm:hover:text-gray-300">
-                  <span className="md:block hidden">
-                    <FontAwesomeIcon icon={faBookmark} size="sm" />
-                  </span>
-                  <span className="md:hidden block">
-                    <FontAwesomeIcon icon={faBookmark} size="lg" />
-                  </span>
-                  <span className="text-xs subpixel-antialiased hidden md:block">
-                    SAVED
-                  </span>
-                </div>
-              </li>
-
-              {/* Tagged Tab */}
-              <li className="sm:hover:cursor-pointer">
-                <div className="flex items-center space-x-2 inline-block py-4 p-1 border-t-2 border-gray-300 sm:hover:border-gray-300 border-transparent text-gray-300 sm:hover:text-gray-300">
-                  <span className="md:block hidden">
-                    <FontAwesomeIcon icon={faTag} size="sm" />
-                  </span>
-                  <span className="md:hidden block">
-                    <FontAwesomeIcon icon={faTag} size="lg" />
-                  </span>
-                  <span className="text-xs subpixel-antialiased hidden md:block">
-                    TAGGED
-                  </span>
+                <div
+                  className={`flex items-center space-x-2 inline-block py-4 p-1 border-t-2 ${
+                    activeTab === "SAVED" ? "border-gray-300 text-white" : "border-transparent text-gray-300"
+                  }`}
+                  onClick={() => setActiveTab("SAVED")}
+                >
+                  <FontAwesomeIcon icon={faBookmark} size="sm" />
+                  <span className="text-xs subpixel-antialiased hidden md:block">SAVED</span>
                 </div>
               </li>
             </ul>
           </div>
+
           {/* Post section */}
           <div className="flex flex-wrap">
-            <div className="h-fit w-fit basis-1/3 p-0.5 relative hover:brightness-75 group hover:cursor-pointer">
-              <div className="flex absolute space-x-4 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:group-hover:visible invisible">
-                <div className="flex font-bold text-white text-md space-x-1">
-                  <i className="fa-solid fa-heart mt-1"></i>
-                  <span>547</span>
+            {displayedPosts?.map((post, index) => (
+              <div
+                key={index}
+                className="w-fit basis-1/3 p-0.5 relative hover:brightness-75 group hover:cursor-pointer"
+              >
+                <div className="flex absolute space-x-4 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:group-hover:visible invisible">
+                  <div className="flex font-bold text-white text-md space-x-1">
+                    <FontAwesomeIcon icon={faHeart} />
+                    <span>{post.likeCount || 0}</span>
+                  </div>
+                  <div className="flex font-bold text-white text-md space-x-1">
+                    <FontAwesomeIcon icon={faComment} />
+                    <span>{post.comments?.length || 0}</span>
+                  </div>
                 </div>
-                <div className="flex font-bold text-white text-md space-x-1">
-                  <i className="fa-solid fa-comment mt-1"></i>
-                  <span>699</span>
-                </div>
+                <img
+                  className="object-cover h-full"
+                  src={(post.carouselMedia && post.carouselMedia[index]?.mediaUrl) || "https://picsum.photos/seed/default/1024/1280"}
+                  alt={`post ${index}`}
+                />
               </div>
-              <img
-                src="https://picsum.photos/seed/QN5feaiH2h/1024/1280"
-                alt="Post 1"
-              />
-            </div>
-
-            <div className="h-fit w-fit basis-1/3 p-0.5 relative hover:brightness-75 group hover:cursor-pointer">
-              <div className="flex absolute space-x-4 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:group-hover:visible invisible">
-                <div className="flex font-bold text-white text-md space-x-1">
-                  <i className="fa-solid fa-heart mt-1"></i>
-                  <span>914</span>
-                </div>
-                <div className="flex font-bold text-white text-md space-x-1">
-                  <i className="fa-solid fa-comment mt-1"></i>
-                  <span>36</span>
-                </div>
-              </div>
-              <img
-                src="https://picsum.photos/seed/BVU1xbSK/1024/1280"
-                alt="Post 2"
-              />
-            </div>
+            ))}
           </div>
         </div>
       </div>

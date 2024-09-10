@@ -1,6 +1,6 @@
 
 export  interface User {
-  id: number;
+  id: string;
   userName: string;
   email: string;
   status:boolean;
@@ -10,6 +10,7 @@ export  interface User {
   bio: string;
   role:boolean
   password: string; 
+  savedPost: string[];
   follows: {
     userId: string;
     created_at: string;
@@ -57,6 +58,7 @@ export  interface User {
   export interface PostCard {
     id:string ;
     title: string;
+    idUser:string;
     content: string;
     carouselMedia?: PostMedia[];         // URL của các phương tiện (media) trong carousel
     profilePictureUrl: string;        // URL của ảnh đại diện người đăng

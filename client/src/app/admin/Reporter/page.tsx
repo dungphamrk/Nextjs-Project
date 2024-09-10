@@ -1,5 +1,5 @@
 "use client"
-import PhotoModal from '@/app/components/PhotoModal'
+import PhotoModal from '@/app/components/modal/PhotoModal'
 import React, { useState } from 'react'
 
 export default function page() {

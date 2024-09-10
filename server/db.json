@@ -252,6 +252,170 @@
       "banner": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
       "avatar": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
       "created_at": "6/9/2024"
+    },
+    {
+      "userName": "dungpham197",
+      "password": "U2FsdGVkX1882qi+88JNRn9dqVEnXgEiAPulzi2GZOw=",
+      "email": "dungpham197rk@gmail.com",
+      "name": "dung pham",
+      "friends": [],
+      "follows": [],
+      "groups": [],
+      "id": 6441,
+      "savedPost":["1","2","3"],
+      "banner": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
+      "avatar": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
+      "created_at": "10/9/2024"
+    }
+  ],
+  "posts" :[
+    {
+      "id": "1",
+      "title": "A Day in the Mountains",
+      "content": "Hiking in the mountains was incredible. The view was amazing!",
+      "idUser":"6441",
+      "carouselMedia": [
+        {
+          "index": 1,
+          "title": "Mountain View",
+          "mediaUrl": "https://picsum.photos/seed/mountain/800/600",
+          "type": "image"
+        },
+        {
+          "index": 2,
+          "title": "Hiking Trail",
+          "mediaUrl": "https://picsum.photos/seed/trail/800/600",
+          "type": "image"
+        }
+      ],
+      "profilePictureUrl": "https://picsum.photos/seed/user1/200/200",
+      "userName": "NatureLover",
+      "createdAt": "2024-09-05T14:48:00.000Z",
+      "updatedAt": "2024-09-06T10:30:00.000Z",
+      "likeCount": 120,
+      "hasLiked": true,
+      "comments": [
+        {
+          "id": 1,
+          "userName": "JohnDoe",
+          "profilePictureUrl": "https://picsum.photos/seed/johndoe/100/100",
+          "content": "Wow, looks so peaceful!",
+          "createdAt": "2024-09-05T16:20:00.000Z"
+        },
+        {
+          "id": 2,
+          "userName": "JaneDoe",
+          "profilePictureUrl": "https://picsum.photos/seed/janedoe/100/100",
+          "content": "Amazing view! I wish I were there!",
+          "createdAt": "2024-09-05T18:45:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "title": "Delicious Homemade Pizza",
+      "content": "Tried making pizza at home for the first time, and it turned out great!",
+      "idUser":"6441",
+      "carouselMedia": [
+        {
+          "index": 1,
+          "title": "Pizza Ready",
+          "mediaUrl": "https://picsum.photos/seed/pizza/800/600",
+          "type": "image"
+        },
+        {
+          "index": 2,
+          "title": "Pizza in the Oven",
+          "mediaUrl": "https://picsum.photos/seed/oven/800/600",
+          "type": "image"
+        }
+      ],
+      "profilePictureUrl": "https://picsum.photos/seed/user2/200/200",
+      "userName": "FoodieBaker",
+      "createdAt": "2024-09-01T12:30:00.000Z",
+      "likeCount": 250,
+      "hasLiked": false,
+      "comments": [
+        {
+          "id": 1,
+          "userName": "PizzaLover",
+          "profilePictureUrl": "https://picsum.photos/seed/pizzalover/100/100",
+          "content": "Looks delicious! What's your secret?",
+          "createdAt": "2024-09-01T14:50:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "title": "Sunset at the Beach",
+      "content": "Caught the perfect sunset yesterday. Nature never fails to amaze!",
+      "idUser":"6441",
+      "carouselMedia": [
+        {
+          "index": 1,
+          "title": "Beach Sunset",
+          "mediaUrl": "https://picsum.photos/seed/sunset/800/600",
+          "type": "image"
+        }
+      ],
+      "profilePictureUrl": "https://picsum.photos/seed/user3/200/200",
+      "userName": "BeachVibes",
+      "createdAt": "2024-08-28T18:00:00.000Z",
+      "likeCount": 340,
+      "hasLiked": true,
+      "comments": [
+        {
+          "id": 1,
+          "userName": "SeaLover",
+          "profilePictureUrl": "https://picsum.photos/seed/sealover/100/100",
+          "content": "Absolutely stunning!",
+          "createdAt": "2024-08-28T19:30:00.000Z"
+        },
+        {
+          "id": 2,
+          "userName": "SunChaser",
+          "profilePictureUrl": "https://picsum.photos/seed/sunchaser/100/100",
+          "content": "This is pure beauty!",
+          "createdAt": "2024-08-28T20:15:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "title": "Sunset at the Beach",
+      "content": "Caught the perfect sunset yesterday. Nature never fails to amaze!",
+      "idUser":"6441",
+      "carouselMedia": [
+        {
+          "index": 1,
+          "title": "Beach Sunset",
+          "mediaUrl": "https://picsum.photos/seed/sunset/800/600",
+          "type": "image"
+        }
+      ],
+      "profilePictureUrl": "https://picsum.photos/seed/user3/200/200",
+      "userName": "BeachVibes",
+      "createdAt": "2024-08-28T18:00:00.000Z",
+      "likeCount": 340,
+      "hasLiked": true,
+      "comments": [
+        {
+          "id": 1,
+          "userName": "SeaLover",
+          "profilePictureUrl": "https://picsum.photos/seed/sealover/100/100",
+          "content": "Absolutely stunning!",
+          "createdAt": "2024-08-28T19:30:00.000Z"
+        },
+        {
+          "id": 2,
+          "userName": "SunChaser",
+          "profilePictureUrl": "https://picsum.photos/seed/sunchaser/100/100",
+          "content": "This is pure beauty!",
+          "createdAt": "2024-08-28T20:15:00.000Z"
+        }
+      ]
     }
   ]
+  
 }
+

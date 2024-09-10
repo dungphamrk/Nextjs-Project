@@ -14,7 +14,7 @@ import {
   CaretUpOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
-import Modal from "@/app/components/Modal";
+import Modal from "@/app/components/modal/Modal";
 import { User } from "../../interfaces/types";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 
@@ -24,7 +24,7 @@ const page: React.FC = () => {
   const totalPages = useSelector(
     (state: { users: UserState }) => state.users.totalPages
   );
-  const toggleStatus = (id: number) => {
+  const toggleStatus = (id: string) => {
     swal({
       title: "Cảnh báo?",
       text: "Bạn sẽ khóa tài khoản này!",
@@ -40,7 +40,7 @@ const page: React.FC = () => {
     });
   };
 
-  const toggleRole = (id: number) => {
+  const toggleRole = (id: string) => {
     swal({
       title: "Cảnh báo?",
       text: "Đổi role của tài khoản này !",
@@ -58,11 +58,12 @@ const page: React.FC = () => {
   const modalOpen = useSelector(
     (state: { users: UserState }) => state.users.modalOpen
   );
-  const [currentUserId, setCurrentUserId] = useState<number | null>(null);
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null);
   const [userForm, setUserForm] = useState<User>({
-    id: 0,
+    id: "",
     name: "",
     userName: "",
+    savedPost:[],
     email: "",
     status:false,
     password: "",

@@ -24,7 +24,7 @@ const initialState: PostState = {
   selectedPost: null, 
 };
 export const getPostById:any = createAsyncThunk(
-  "Posts/getPostById",
+  "posts/getPostById",
   async (id: string) => {
     const response = await PostService.getPostById(id);
     console.log(response);
@@ -39,7 +39,7 @@ export const fetchPaginatedPosts: any = createAsyncThunk(
   "Posts/fetchPaginatedPosts",
   async ({ page, limit }: { page: number; limit: number }) => {
     const response = await axios.get(
-      `http://localhost:3000/Posts?_page=${page}&_limit=${limit}`
+      `http://localhost:5000/Posts?_page=${page}&_limit=${limit}`
     );
     console.log(response.data);
     
@@ -160,7 +160,7 @@ const PostSlice = createSlice({
       })
       .addCase(
         updatePost.fulfilled,
-        (state, action: PayloadAction<Post>) => {
+        (state, action: PayloadAction<PostCard>) => {
           const index = state.Posts.findIndex(
             (Post) => Post.id === action.payload.id
           );
@@ -180,7 +180,7 @@ const PostSlice = createSlice({
       })
       .addCase(
         deletePost.fulfilled,
-        (state, action: PayloadAction<number>) => {
+        (state, action: PayloadAction<string>) => {
           state.Posts = state.Posts.filter(
             (Post) => Post.id !== action.payload
           );

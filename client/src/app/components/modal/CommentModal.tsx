@@ -1,60 +1,24 @@
-"use client"
+"use client";
 import { useState, useEffect, useRef } from "react";
-import EmojiPickerModal from "@/app/components/EmojiPickerModal";
+import EmojiPickerModal from "@/app/components/modal/EmojiPickerModal";
 import MediaCarousel from "@/app/components/MediaCarousel";
 import { ModalSize, PostCard } from "@/app/interfaces/types";
-import CommentCard from "@/app/components/CommentCard";
+import CommentCard from "@/app/components/Cards/CommentCard";
 import { faEllipsisH, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 interface Props {
-    appendEmoji: (emoji: string) => void; // Thêm prop này
-    isToggled: boolean;
-    modalSize: ModalSize; 
-  }
-
-
+  appendEmoji: (emoji: string) => void; // Thêm prop này
+  isToggled: boolean;
+  modalSize: ModalSize;
+}
 
 export const CommentModal: React.FC<Props> = ({
   isToggled,
   modalSize = ModalSize.ExtraLarge,
-  
 }) => {
+  const [activePost, setActivePost] = useState<PostCard>();
     
-    const [activePost, setActivePost] = useState<PostCard>({
-        id: "1",
-        userName: 'John Doe',
-        profilePictureUrl: 'https://loremflickr.com/1024/1280/cat',
-        content: 'This is a sample post content.',
-        createdAt: '2024-09-09T12:00:00Z',
-        likeCount: 5,
-        hasLiked: false,
-        comments: [
-            {
-                id: 1,
-                userName: 'Jane Smith',
-                profilePictureUrl: 'https://loremflickr.com/1024/1280/cat',
-                content: 'Great post!',
-                createdAt: '2024-09-09T12:30:00Z',
-            },
-        ],
-        carouselMedia: [
-            {
-                index: 0,
-                title: 'Sample Image',
-                mediaUrl: 'https://loremflickr.com/1024/1280',
-                type: 'image',
-            },
-            {
-              index: 1,
-              title: 'Sample Image',
-              mediaUrl: 'https://loremflickr.com/1024/1280',
-              type: 'image',
-          },
-        ],
-        title: 'Sample Post Title',
-        updatedAt: '2024-09-09T12:00:00Z',
-    });
-    
+
   const [commentForm, setCommentForm] = useState<string>("");
   const commentFormElementRef = useRef<HTMLTextAreaElement>(null);
 
@@ -62,10 +26,9 @@ export const CommentModal: React.FC<Props> = ({
     ? `${activePost.likeCount} Likes`
     : "Be the first to like this";
 
-
   const appendEmoji = (emoji: string) => {
     setCommentForm(commentForm + emoji);
-};
+  };
 
   const focusTextArea = () => {
     commentFormElementRef.current?.focus();
@@ -101,8 +64,6 @@ export const CommentModal: React.FC<Props> = ({
   };
 
 
-console.log(activePost.carouselMedia);
-
   const scrollToTheLatestComment = () => {
     const target = document.getElementById("last-comment");
     if (target) {
@@ -114,7 +75,7 @@ console.log(activePost.carouselMedia);
 
   return (
     <div className={`transition ${isToggled ? "" : "hidden"}  `}>
-      {/* Desktop Modal Header */}     
+      {/* Desktop Modal Header */}
       <div
         className={`fixed inset-x-0 top-5 right-0 ${
           isToggled ? "md:block" : ""
@@ -122,7 +83,7 @@ console.log(activePost.carouselMedia);
       >
         <div className="md:mr-12 flex items-center justify-between cursor-pointer">
           <span className="ml-auto inline-flex text-white">
-          <FontAwesomeIcon icon={faX} />
+            <FontAwesomeIcon icon={faX} />
           </span>
         </div>
       </div>
@@ -154,10 +115,10 @@ console.log(activePost.carouselMedia);
           <div className="relative bg-black flex md:flex-row flex-col">
             {/* Carousel Container */}
             <div className="md:p-0 md:block p-2 w-full min-h-full ">
-                {activePost.carouselMedia &&  <MediaCarousel medias={activePost?.carouselMedia }/>}
+              {activePost && activePost.carouselMedia && (
+                <MediaCarousel medias={activePost?.carouselMedia} />
+              )}
             </div>
-       
-
 
             {/* Comment Container */}
             <div className="flex flex-col h-[600px] sm:space-y-4 lg:basis-7/12 sm:basis-10/12 z-50 sm:border-l border-slate-800 sm:p-2">
@@ -191,7 +152,7 @@ console.log(activePost.carouselMedia);
                       </div>
                     </div>
                     <div className="cursor-pointer">
-                    <FontAwesomeIcon icon={faEllipsisH} />
+                      <FontAwesomeIcon icon={faEllipsisH} />
                     </div>
                   </div>
                 </div>
@@ -236,8 +197,9 @@ console.log(activePost.carouselMedia);
                   activePost.comments.map((comment, index) => (
                     <CommentCard
                       key={comment.id}
-                      id={ activePost &&
-                        activePost.comments && 
+                      id={
+                        activePost &&
+                        activePost.comments &&
                         index === activePost.comments?.length - 1
                           ? "last-comment"
                           : ""
@@ -261,16 +223,13 @@ console.log(activePost.carouselMedia);
               {/* Comment Actions */}
               <div className="sm:block hidden">
                 <div className="flex justify-between p-2 border-t border-slate-800">
-                  <div
-                    className="cursor-pointer text-white"
-                  >
+                  <div className="cursor-pointer text-white">
                     <p>icon</p>
                     {numberOfLikes}
                   </div>
                   <div className="flex items-center space-x-1">
                     <div className="cursor-pointer">
-                    <EmojiPickerModal onSelectEmoji={appendEmoji} />
-
+                      <EmojiPickerModal onSelectEmoji={appendEmoji} />
                     </div>
                     <textarea
                       ref={commentFormElementRef}

@@ -99,15 +99,6 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({
     }
     resetCarouselIndexes;
   }, []);
-  console.log(currentIndex);
-  console.log(prevIndex);
-  console.log(nextIndex);
-  
-  
-  console.log(medias.length);
-  console.log(medias[0].index);
-  
-
   return (
     <div className="relative h-full">
       <div className={`relative overflow-hidden h-full  object-cover object-center ${style}`}>
