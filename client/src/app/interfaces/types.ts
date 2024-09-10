@@ -1,41 +1,89 @@
- export interface Product {
-    id: number;
-    name: string;
-    price: number;
-    description:string;
-    quantity:number;
-    image:string;
-    category:string;
-    created_at: string;      // Thời gian được tạo (format dd/mm/yyyy)
-    updated_at: string;      // Thời gian cập nhật gần nhất (format dd/mm/yyyy)
-  }
+
 export  interface User {
-    id: number;               // ID người dùng
-    username: string;        // Tên đăng nhập
-    email: string;           // Email
-    fullname: string;        // Họ và tên
-    status: boolean;         // Trạng thái người dùng (True - Active, False - Block)
-    password: string;        // Mật khẩu
-    role: boolean;           // Vai trò (True - Quản trị viên, False - User)
-    avatar: string;          // Hình đại diện
-    phone: string;           // Số điện thoại
-    address: string;         // Địa chỉ
-    created_at: string;      // Thời gian được tạo (format dd/mm/yyyy)
-    updated_at: string;      // Thời gian cập nhật gần nhất (format dd/mm/yyyy)
-  }
-export interface Category{
   id: number;
-  name:string;
-  status:boolean
+  userName: string;
+  email: string;
+  status:boolean;
+  name: string;
+  avatar: string;
+  banner: string;
+  bio: string;
+  role:boolean
+  password: string; 
+  follows: {
+    userId: string;
+    created_at: string;
+  }[];
+  friends: {
+    userId: string;
+    add_at: string;
+  }[];
+  groups: any[];
+  created_at: string;
+}
+
+
+
+
+  export interface Suggestion {
+    userName: string;
+    profilePictureUrl: string;
+    followedBy: string;
+  }
+  
+  export interface SuggestionCard {
+    userName: string;
+    profilePictureUrl: string;
+    suggested: Suggestion[];
   }
 
-  export interface Order {
-    id: number;
-    createdAt: string; // You might want to use Date if you are directly handling Date objects.
-    customerName: string;
-    orderStatus: string;
-    totalAmount: number;
-    address:string;
-    productName:string;
-    // You can add more fields here as needed.
+  export interface PostMedia {
+    index: number;
+    title: string;
+    mediaUrl: string;
+    type: 'image' | 'video';
   }
+  
+
+  export enum ModalSize {
+    SuperSmall = 'SuperSmall',
+    ExtraSmall = 'ExtraSmall',
+    Small = 'Small',
+    Medium = 'Medium',
+    Large = 'Large',
+    ExtraLarge = 'ExtraLarge',
+  }
+  
+  export interface PostCard {
+    id:string ;
+    title: string;
+    content: string;
+    carouselMedia?: PostMedia[];         // URL của các phương tiện (media) trong carousel
+    profilePictureUrl: string;        // URL của ảnh đại diện người đăng
+    userName: string;                 // Tên người đăng
+    createdAt: string;                // Ngày tạo bài viết
+    updatedAt?: string;               // Ngày cập nhật bài viết (tuỳ chọn)
+    likeCount: number;                // Số lượt thích
+    hasLiked: boolean;                // Trạng thái đã thích bài viết hay chưa
+    comments?: Comment[];             // Mảng bình luận trong bài viết
+  }
+  
+  export interface Comment {
+    id: number;
+    userName: string;
+    profilePictureUrl: string;
+    content: string;
+    createdAt: string;
+  }
+  
+
+  
+    // common.ts
+  export  interface PostCommentCard {
+      id: number;
+      userName: string;
+      profilePictureUrl: string;
+      content: string;
+      createdAt: string;
+    }
+    

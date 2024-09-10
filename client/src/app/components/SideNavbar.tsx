@@ -62,7 +62,7 @@ const SideNavbar = () => {
   };
 
   return (
-    <div className={`${isMoreModalOpen ? '' : 'lights-off'} flex flex-col h-screen space-y-4 flex-nowrap sticky top-0 justify-between`}>
+    <div className={`${isMoreModalOpen ? '' : 'lights-off'}  flex flex-col h-screen space-y-4 flex-nowrap sticky top-0 justify-between `}>
       {/* Icon and Navbar */}
       <div className="flex flex-col">
         <div className={`p-4 rounded-lg flex cursor-pointer justify-center ${!isNavBarCollapsed ? 'xl:justify-start' : ''}`}>
@@ -76,7 +76,7 @@ const SideNavbar = () => {
           <div className={isNavBarCollapsed ? 'block pt-5' : 'xl:hidden block'}>
             <FontAwesomeIcon icon={faHome} size="2x" />
           </div>
-        </div>
+        </div>  
 
         {/* Side NavBar Items */}
         <div className="p-1 md:pl-3 flex flex-col space-y-2">

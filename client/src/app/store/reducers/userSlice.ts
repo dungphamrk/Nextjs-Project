@@ -28,7 +28,7 @@ export const fetchPaginatedUsers: any = createAsyncThunk(
   "users/fetchPaginatedUsers",
   async ({ page, limit }: { page: number; limit: number }) => {
     const response = await axios.get(
-      `http://localhost:3000/users?_page=${page}&_limit=${limit}`
+      `http://localhost:5000/users?_page=${page}&_limit=${limit}`
     );
     return {
       users: response.data,
@@ -48,19 +48,19 @@ export const getAllUser: any = createAsyncThunk(
   });
 
 export const registerUser:any = createAsyncThunk('users/registerUser', async (newUser: User) => {
-  const response = await axios.post('http://localhost:3000/users', newUser);
+  const response = await axios.post('http://localhost:5000/users', newUser);
   console.log(newUser);
   
   return response.data;
 });
 
 export const updateUser:any = createAsyncThunk('users/updateUser', async (updatedUser: User) => {
-  const response = await axios.put(`http://localhost:3000/users/${updatedUser.id}`, updatedUser);
+  const response = await axios.put(`http://localhost:5000/users/${updatedUser.id}`, updatedUser);
   return response.data;
 });
 
 export const deleteUser:any = createAsyncThunk('users/deleteUser', async (id: number) => {
-  await axios.delete(`http://localhost:3000/users/${id}`);
+  await axios.delete(`http://localhost:5000/users/${id}`);
   return id;
 });
 

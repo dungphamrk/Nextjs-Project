@@ -5,30 +5,27 @@ import { Switch } from "@headlessui/react";
 import { useDispatch } from "react-redux";
 import { registerUser } from "@/app/store/reducers/userSlice";
 import swal from "sweetalert";
-import { useNavigate } from "react-router-dom";
 import { User } from "@/app/interfaces/types";
 import CryptoJS from "crypto-js";
+import { useRouter } from "next/navigation";
+
 import axios from "axios"; // Import axios để gửi yêu cầu API
 
 interface FormData {
-  username: string;
+  userName: string;
   password: string;
   email: string;
-  phone: string;
-  address: string;
-  fullname: string;
+  name: string;
 }
 
 export default function Register() {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [agreed, setAgreed] = useState(false);
   const [formData, setFormData] = useState<FormData>({
-    username: "",
+    userName: "",
     password: "",
     email: "",
-    phone: "",
-    address: "",
-    fullname: "",
+    name: "",
   });
   const dispatch = useDispatch();
   const [errors, setErrors] = useState<Partial<FormData>>({});
@@ -37,14 +34,14 @@ export default function Register() {
     const newErrors: Partial<FormData> = {};
     try {
       const usernameResponse = await axios.post("/api/check-username", {
-        username: formData.username,
+        username: formData.userName,
       });
       const emailResponse = await axios.post("/api/check-email", {
         email: formData.email,
       });
 
       if (!usernameResponse.data.isUnique) {
-        newErrors.username = "Tên đăng nhập đã tồn tại";
+        newErrors.userName = "Tên đăng nhập đã tồn tại";
       }
       if (!emailResponse.data.isUnique) {
         newErrors.email = "Email đã tồn tại";
@@ -58,7 +55,7 @@ export default function Register() {
 
   const validate = async (): Promise<boolean> => {
     const newErrors: Partial<FormData> = {};
-    if (!formData.username) newErrors.username = "Tên đăng nhập là bắt buộc";
+    if (!formData.userName) newErrors.userName = "Tên đăng nhập là bắt buộc";
     if (!formData.password) newErrors.password = "Mật khẩu là bắt buộc";
     if(formData.password.length<7) newErrors.password="Mật khẩu phải có ít nhất 7 kí tự"
     if (!formData.email) {
@@ -66,9 +63,7 @@ export default function Register() {
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = "Email không hợp lệ";
     }
-    if (!formData.phone) newErrors.phone = "Số điện thoại là bắt buộc";
-    if (!formData.address) newErrors.address = "Địa chỉ là bắt buộc";
-    if (!formData.fullname) newErrors.fullname = "Họ và tên là bắt buộc";
+    if (!formData.name) newErrors.name = "Họ và tên là bắt buộc";
 
     const uniquenessErrors = await checkUnique();
     setErrors({ ...newErrors, ...uniquenessErrors });
@@ -97,16 +92,19 @@ export default function Register() {
       const user: Partial<User> = {
         ...formData,
         password: encryptedPassword,
+        friends: [],
+        follows:[],
+        groups:[],
         id: Math.floor(Math.random() * 10000), // Random id for demo purposes
-        status: true, // Default active status
-        role: false, // Default role as user
+        banner:"https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
         avatar: "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878", // Default avatar URL
         created_at: new Date().toLocaleDateString("vi-VN"),
-        updated_at: new Date().toLocaleDateString("vi-VN"),
       };
+      console.log(user);
+      
       dispatch(registerUser(user as User));
       swal("Welcome", "Đăng kí thành công", "success");
-      navigate("/login");
+      
     } else {
       swal("Lỗi", "Vui lòng kiểm tra lại thông tin đăng ký", "error");
     }
@@ -137,23 +135,23 @@ export default function Register() {
         <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
           <div className="sm:col-span-2">
             <label
-              htmlFor="fullname"
+              htmlFor="name"
               className="block text-sm font-semibold leading-6 text-gray-900"
             >
               Họ và tên
             </label>
             <div className="mt-2.5">
               <input
-                id="fullname"
-                name="fullname"
+                id="name"
+                name="name"
                 type="text"
-                autoComplete="fullname"
-                value={formData.fullname}
+                autoComplete="name"
+                value={formData.name}
                 onChange={handleChange}
                 className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
-              {errors.fullname && (
-                <p className="text-red-500 text-sm mt-1">{errors.fullname}</p>
+              {errors.name && (
+                <p className="text-red-500 text-sm mt-1">{errors.name}</p>
               )}
             </div>
           </div>
@@ -166,16 +164,16 @@ export default function Register() {
             </label>
             <div className="mt-2.5">
               <input
-                id="username"
-                name="username"
+                id="userName"
+                name="userName"
                 type="text"
-                autoComplete="username"
-                value={formData.username}
+                autoComplete="userName"
+                value={formData.userName}
                 onChange={handleChange}
                 className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
-              {errors.username && (
-                <p className="text-red-500 text-sm mt-1">{errors.username}</p>
+              {errors.userName && (
+                <p className="text-red-500 text-sm mt-1">{errors.userName}</p>
               )}
             </div>
           </div>
@@ -220,49 +218,6 @@ export default function Register() {
               />
               {errors.email && (
                 <p className="text-red-500 text-sm mt-1">{errors.email}</p>
-              )}
-            </div>
-          </div>
-          <div className="sm:col-span-2">
-            <label
-              htmlFor="phone"
-              className="block text-sm font-semibold leading-6 text-gray-900"
-            >
-              Số điện thoại
-            </label>
-            <div className="mt-2.5">
-              <input
-                id="phone"
-                name="phone"
-                type="tel"
-                autoComplete="tel"
-                value={formData.phone}
-                onChange={handleChange}
-                className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              />
-              {errors.phone && (
-                <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
-              )}
-            </div>
-          </div>
-          <div className="sm:col-span-2">
-            <label
-              htmlFor="address"
-              className="block text-sm font-semibold leading-6 text-gray-900"
-            >
-              Địa chỉ
-            </label>
-            <div className="mt-2.5">
-              <textarea
-                id="address"
-                name="address"
-                rows={4}
-                value={formData.address}
-                onChange={handleChange}
-                className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              />
-              {errors.address && (
-                <p className="text-red-500 text-sm mt-1">{errors.address}</p>
               )}
             </div>
           </div>

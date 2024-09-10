@@ -1,97 +1,66 @@
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+// TopNavBar.tsx (Next.js)
+"use client"
+import { useEffect, useState } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faPlus, faHeart, faCircle } from '@fortawesome/free-solid-svg-icons'; // Import icons
-import Image from 'next/image';
+import { faArrowLeft, faBell, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const TopNavBar = () => {
-  const router = useRouter();
-  const [isDropDownTriggered, setIsDropDownTriggered] = useState(false);
-  const [routeName, setRouteName] = useState('');
+    const [isDropDownTriggered, setIsDropDownTriggered] = useState(false);
+    const pathname = usePathname();
+    const router = useRouter();
 
-  const toggleDropDown = () => {
-    setIsDropDownTriggered(!isDropDownTriggered);
-  };
+    const onPageBack = () => {
+        if (window.history.length > 0) {
+            router.back();
+        } else {
+            router.push('/home');
+        }
+    };
 
-  const onPageBack = () => {
-    const historyCount = window.history.length;
-    setTimeout(() => {
-      if (historyCount > 0) {
-        router.push('/home');
-      } else {
-        router.back();
-      }
-    }, 1000);
-  };
+    const triggerDropDown = () => {
+        setIsDropDownTriggered(!isDropDownTriggered);
+    };
 
-  const unsupportedFeature = () => {
-    alert('This feature is not supported yet');
-  };
+    return (
+        <div className="sticky top-0 z-50 bg-black border-gray-800 border-t border-b">
+            <div className="flex justify-between relative">
+                <div className="p-3 cursor-pointer" onClick={onPageBack}>
+                    {pathname !== '/home' ? (
+                        <FontAwesomeIcon icon={faArrowLeft} className="w-6 h-6 rotate-270" />
+                    ) : (
+                        <img src="/path/to/logo.png" alt="Logo" className="w-32 h-7" />
+                    )}
+                </div>
+                
+                {pathname === '/home' && (
+                    <div className="flex space-x-2">
+                        <div onClick={triggerDropDown} className="cursor-pointer p-3">
+                            <FontAwesomeIcon icon={faPlus} className="w-6 h-6" />
+                        </div>
+                        <div className="cursor-pointer p-3" onClick={() => router.push('/notifications')}>
+                            <FontAwesomeIcon icon={faBell} className="w-6 h-6" />
+                        </div>
+                    </div>
+                )}
+            </div>
 
-  const onToggle = () => {
-    // Trigger your file upload dialog logic here
-    console.log('File upload dialog triggered');
-  };
-
-  useEffect(() => {
-    const currentRoute = router.pathname === '/profile' ? router.query.username : router.pathname;
-    setRouteName(currentRoute?.toString() || '');
-  }, [router.pathname, router.query]);
-
-  return (
-    <div className="flex flex-col space-x-2 justify-around sticky top-0 md:hidden z-50 bg-black border-gray-800 border-t border-b">
-      <div className="flex space-x-2 justify-between relative">
-        <div className="group cursor-pointer rounded-full flex space-x-4 sm:hover:bg-slate-1000 p-3 xl:justify-start justify-center">
-          {routeName !== '/home' ? (
-            <span className="rotate-[270deg]">
-              <FontAwesomeIcon icon={faArrowLeft} className="group-hover:scale-110" onClick={onPageBack} />
-            </span>
-          ) : (
-            <Image className="w-32 h-7" src="/path-to-your-logo/icon-dark.png" alt="Logo" width={128} height={28} />
-          )}
+            {isDropDownTriggered && (
+                <div className="absolute right-5 z-50 bg-gray-800 rounded-lg shadow w-24">
+                    <div className="flex flex-col p-2 space-y-2 text-sm text-gray-200">
+                        <div onClick={() => alert('Post clicked')} className="cursor-pointer flex justify-between">
+                            <span>Post</span>
+                            <FontAwesomeIcon icon={faPlus} />
+                        </div>
+                        <div onClick={() => alert('Story clicked')} className="cursor-pointer flex justify-between">
+                            <span>Story</span>
+                            <FontAwesomeIcon icon={faPlus} />
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
-
-        {routeName === '/home' ? (
-          <div className="flex space-x-0.5">
-            <div
-              onClick={toggleDropDown}
-              className="group cursor-pointer rounded-full flex space-x-4 sm:hover:bg-slate-1000 pt-3 xl:justify-start justify-center"
-            >
-              <FontAwesomeIcon icon={faPlus} className="group-hover:scale-110" />
-            </div>
-
-            <div
-              onClick={() => router.push('/notifications')}
-              className="group cursor-pointer rounded-full flex space-x-4 sm:hover:bg-slate-1000 p-3 xl:justify-start justify-center"
-            >
-              <FontAwesomeIcon icon={faHeart} className="group-hover:scale-110" />
-            </div>
-          </div>
-        ) : (
-          <div className="font-sans text-md font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ml-12 text-white">
-            <span className="capitalize">{routeName}</span>
-          </div>
-        )}
-      </div>
-
-      {/* Drop Down Menu */}
-      {isDropDownTriggered && (
-        <div className="absolute right-5 z-50 md:hidden bg-slate-1100 divide-y divide-gray-100 rounded-lg shadow w-24">
-          <div className="flex flex-col pt-2 pb-2 text-sm text-gray-200 space-y-3">
-            <div onClick={onToggle} className="flex justify-evenly cursor-pointer">
-              <span>Post</span>
-              <FontAwesomeIcon icon={faCircle} className="self-end group-hover:scale-100" />
-            </div>
-
-            <div onClick={unsupportedFeature} className="flex justify-evenly">
-              <span>Story</span>
-              <FontAwesomeIcon icon={faCircle} className="self-end group-hover:scale-100" />
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
+    );
 };
 
 export default TopNavBar;

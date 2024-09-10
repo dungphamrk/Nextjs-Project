@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { User } from '../interfaces/types'; // Ensure you have a User interface defined
 
-const API_URL = 'http://localhost:3000/users'; // Update your API URL if needed
+const API_URL = 'http://localhost:5000/users'; // Update your API URL if needed
 
 export const UserService = {
   async getAllUsers(): Promise<User> {

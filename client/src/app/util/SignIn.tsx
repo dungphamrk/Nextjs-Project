@@ -1,14 +1,15 @@
+"use client"
 import React, { useEffect, useState, FormEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { getAllUser } from "@/app/store/reducers/userSlice";
 import { User } from "@/app/interfaces/types";
 import CryptoJS from "crypto-js";
+import { useRouter } from "next/navigation";
 
 export default function SignIn() {
   const allUsers = useSelector((state: any) => state.users.users);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const [account, setAccount] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -29,13 +30,13 @@ export default function SignIn() {
       ).toString(CryptoJS.enc.Utf8);
       console.log(decryptedPassword);
       
-      return user.username === account && decryptedPassword === password;
+      return user.userName === account && decryptedPassword === password;
     });
 
     if (user) {
       localStorage.setItem("currentUser", JSON.stringify(user));
 
-      navigate("/home");
+      router.push("/home");
       location.reload();
     } else {
       setError("Invalid username or password");
@@ -122,7 +123,7 @@ export default function SignIn() {
         <p className="mt-10 text-center text-sm text-gray-500">
           Bạn chưa có tài khoản?{" "}
           <button
-          onClick={()=>navigate("/register")}
+          onClick={()=>router.push("/register")}
             className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
           >
             Hãy đăng kí tài khoản tại đây
