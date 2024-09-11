@@ -5,6 +5,8 @@
       "userName": "john_doe",
       "email": "john@example.com",
       "name": "John Doe",
+      "status": true,
+      "role": false,
       "password": "12345678",
       "avatar": "https://example.com/profiles/john.jpg",
       "banner": "https://example.com/profiles/john.jpg",
@@ -30,6 +32,8 @@
       "email": "jane@example.com",
       "name": "Jane Smith",
       "password": "12345678",
+      "status": true,
+      "role": false,
       "avatar": "https://example.com/profiles/jane.jpg",
       "banner": "https://example.com/profiles/jane.jpg",
       "bio": "Graphic designer and art lover.",
@@ -54,6 +58,8 @@
       "email": "mike@example.com",
       "name": "Mike Ross",
       "password": "12345678",
+      "status": true,
+      "role": false,
       "avatar": "https://example.com/profiles/mike.jpg",
       "banner": "https://example.com/profiles/mike.jpg",
       "bio": "Lawyer and chess enthusiast.",
@@ -78,6 +84,8 @@
       "email": "sarah@example.com",
       "name": "Sarah Connor",
       "password": "12345678",
+      "status": true,
+      "role": false,
       "avatar": "https://example.com/profiles/sarah.jpg",
       "banner": "https://example.com/profiles/sarah.jpg",
       "bio": "Fitness coach and survivalist.",
@@ -102,6 +110,8 @@
       "email": "tony@example.com",
       "name": "Tony Stark",
       "password": "12345678",
+      "status": true,
+      "role": false,
       "avatar": "https://example.com/profiles/tony.jpg",
       "banner": "https://example.com/profiles/tony.jpg",
       "bio": "Engineer and inventor.",
@@ -126,6 +136,8 @@
       "email": "bruce@example.com",
       "name": "Bruce Wayne",
       "password": "12345678",
+      "status": true,
+      "role": false,
       "avatar": "https://example.com/profiles/bruce.jpg",
       "banner": "https://example.com/profiles/bruce.jpg",
       "bio": "Philanthropist and businessman.",
@@ -150,6 +162,8 @@
       "email": "clark@example.com",
       "name": "Clark Kent",
       "password": "12345678",
+      "status": true,
+      "role": false,
       "avatar": "https://example.com/profiles/clark.jpg",
       "banner": "https://example.com/profiles/clark.jpg",
       "bio": "Journalist and traveler.",
@@ -174,6 +188,8 @@
       "email": "diana@example.com",
       "name": "Diana Prince",
       "password": "12345678",
+      "status": true,
+      "role": false,
       "avatar": "https://example.com/profiles/diana.jpg",
       "banner": "https://example.com/profiles/diana.jpg",
       "bio": "Historian and diplomat.",
@@ -198,6 +214,8 @@
       "email": "peter@example.com",
       "name": "Peter Parker",
       "password": "12345678",
+      "status": true,
+      "role": false,
       "avatar": "https://example.com/profiles/peter.jpg",
       "banner": "https://example.com/profiles/peter.jpg",
       "bio": "Photographer and student.",
@@ -222,6 +240,8 @@
       "email": "steve@example.com",
       "name": "Steve Rogers",
       "password": "12345678",
+      "status": true,
+      "role": false,
       "avatar": "https://example.com/profiles/steve.jpg",
       "banner": "https://example.com/profiles/steve.jpg",
       "bio": "Soldier and patriot.",
@@ -245,6 +265,8 @@
       "password": "U2FsdGVkX1/C6vRqhL9VYuVOi4NlRbepgyppd9K+qiM=",
       "email": "dungpham197qn@gmail.com",
       "name": "dung pham",
+      "status": true,
+      "role": false,
       "friends": [],
       "follows": [],
       "groups": [],
@@ -258,22 +280,28 @@
       "password": "U2FsdGVkX1882qi+88JNRn9dqVEnXgEiAPulzi2GZOw=",
       "email": "dungpham197rk@gmail.com",
       "name": "dung pham",
+      "status": true,
+      "role": true,
       "friends": [],
       "follows": [],
       "groups": [],
       "id": 6441,
-      "savedPost":["1","2","3"],
+      "savedPost": [
+        "1",
+        "2",
+        "3"
+      ],
       "banner": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
       "avatar": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
       "created_at": "10/9/2024"
     }
   ],
-  "posts" :[
+  "posts": [
     {
       "id": "1",
       "title": "A Day in the Mountains",
       "content": "Hiking in the mountains was incredible. The view was amazing!",
-      "idUser":"6441",
+      "idUser": "6441",
       "carouselMedia": [
         {
           "index": 1,
@@ -315,7 +343,7 @@
       "id": "2",
       "title": "Delicious Homemade Pizza",
       "content": "Tried making pizza at home for the first time, and it turned out great!",
-      "idUser":"6441",
+      "idUser": "6441",
       "carouselMedia": [
         {
           "index": 1,
@@ -349,7 +377,7 @@
       "id": "3",
       "title": "Sunset at the Beach",
       "content": "Caught the perfect sunset yesterday. Nature never fails to amaze!",
-      "idUser":"6441",
+      "idUser": "6441",
       "carouselMedia": [
         {
           "index": 1,
@@ -384,7 +412,7 @@
       "id": "4",
       "title": "Sunset at the Beach",
       "content": "Caught the perfect sunset yesterday. Nature never fails to amaze!",
-      "idUser":"6441",
+      "idUser": "6441",
       "carouselMedia": [
         {
           "index": 1,
@@ -416,6 +444,4 @@
       ]
     }
   ]
-  
 }
-

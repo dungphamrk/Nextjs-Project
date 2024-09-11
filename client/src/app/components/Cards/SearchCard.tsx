@@ -6,12 +6,14 @@ import { FC } from 'react';
 interface SearchCardProps {
   searchResult: {
     userName: string;
-    profilePictureUrl: string;
+    avatar: string;
     bio?: string;
   };
 }
 
 const SearchCard: FC<SearchCardProps> = ({ searchResult }) => {
+  console.log(searchResult);
+  
   const router = useRouter();
 
   const goToUserProfile = (userName: string) => {
@@ -24,11 +26,11 @@ const SearchCard: FC<SearchCardProps> = ({ searchResult }) => {
       className="rounded-lg flex items-center space-x-2 w-full p-2 h-12 cursor-pointer"
     >
       <div className="flex-none">
-        <Image
-          src={searchResult.profilePictureUrl}
+        <img
+          src={searchResult.avatar}
           alt={`${searchResult.userName}'s profile picture`}
-          width={56} // Adjust for responsive images as needed
-          height={56}
+          width={35} // Adjust for responsive images as needed
+          height={35}
           className="rounded-full"
         />
       </div>

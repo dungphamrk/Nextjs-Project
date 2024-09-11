@@ -3,12 +3,12 @@ export  interface User {
   id: string;
   userName: string;
   email: string;
-  status:boolean;
+  status:boolean; 
+   role:boolean
   name: string;
   avatar: string;
   banner: string;
   bio: string;
-  role:boolean
   password: string; 
   savedPost: string[];
   follows: {

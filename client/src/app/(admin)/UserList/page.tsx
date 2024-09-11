@@ -17,7 +17,7 @@ import {
 import Modal from "@/app/components/modal/Modal";
 import { User } from "../../interfaces/types";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
-
+import Swal from "sweetalert2";
 const page: React.FC = () => {
   const dispatch = useDispatch();
   const users = useSelector((state: { users: UserState }) => state.users.users);
@@ -25,35 +25,86 @@ const page: React.FC = () => {
     (state: { users: UserState }) => state.users.totalPages
   );
   const toggleStatus = (id: string) => {
-    swal({
+     let user = users.find((item) => item.id === id);
+    if(user?.status){
+         Swal.fire({
       title: "Cảnh báo?",
       text: "Bạn sẽ khóa tài khoản này!",
       icon: "warning",
-      dangerMode: true,
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
     }).then((willDelete: any) => {
-      if (willDelete) {
-        let user = users.find((item) => item.id === id);
+      
+      if (willDelete.isConfirmed) {
+      
         dispatch(updateUser({ ...user, status: !user?.status }));
       } else {
-        swal("Your user is safe!");
+        Swal.fire("Tác vụ đã hủy");
       }
     });
+    } else{
+      Swal.fire({
+        title: "Cảnh báo?",
+        text: "Bạn sẽ mở khóa tài khoản này!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then((willDelete: any) => {
+        
+        if (willDelete.isConfirmed) {
+        
+          dispatch(updateUser({ ...user, status: !user?.status }));
+        } else {
+          Swal.fire("Tác vụ đã hủy");
+        }
+      });
+    }
+
+ 
+
   };
 
   const toggleRole = (id: string) => {
-    swal({
+    let user = users.find((item) => item.id === id);
+
+    if(user?.role){
+         Swal.fire({
       title: "Cảnh báo?",
-      text: "Đổi role của tài khoản này !",
+      text: "Bạn muốn đưa tài khoản này quyền admin? !",
       icon: "warning",
-      dangerMode: true,
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
     }).then((willDelete: any) => {
-      if (willDelete) {
-        let user = users.find((item) => item.id === id);
+      if (willDelete.isConfirmed) {
         dispatch(updateUser({ ...user, role: !user?.role }));
       } else {
-        swal("Your user is safe!");
+        Swal.fire("Tác vụ đã hủy");
       }
     });
+    }else{
+      Swal.fire({
+        title: "Cảnh báo?",
+        text: "Bạn muốn gỡ quyền admin của tài khoản này ?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then((willDelete: any) => {
+        if (willDelete.isConfirmed) {
+          dispatch(updateUser({ ...user, role: !user?.role }));
+        } else {
+          Swal.fire("Tác vụ đã hủy");
+        }
+      });
+    }
+ 
   };
   const modalOpen = useSelector(
     (state: { users: UserState }) => state.users.modalOpen
@@ -82,7 +133,6 @@ const page: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const ITEMS_PER_PAGE = 7;
-  console.log(111);
 
   useEffect(() => {
     dispatch(fetchPaginatedUsers({ page: currentPage, limit: ITEMS_PER_PAGE }));

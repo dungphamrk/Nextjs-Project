@@ -1,8 +1,5 @@
 "use client";
-
-import Image from "next/image";
-import SideNavbar from "@/app/components/SideNavbar";
-import RightNavbar from "@/app/components/RightNavbar";
+import RightNavbar from "@/app/components/navbar/RightNavbar";
 import Post, { PostCard } from "@/app/components/Post";
 import { useState } from "react";
 
@@ -86,8 +83,6 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex no-scrollbar  h-screen overflow-hidden">
-        <SideNavbar />
         <div className="w-full flex justify-evenly sm:mt-10 ">
           <div className="flex flex-col w-full md:w-[600px] gap-9 space-y-4 overflow-y-scroll no-scrollbar px-4">
             {posts.map((post) => (
@@ -103,9 +98,6 @@ export default function Home() {
           </div>  
            <RightNavbar />
         </div>
-
-     
-      </div>
     </>
   );
 }
