@@ -270,6 +270,11 @@
       "friends": [],
       "follows": [],
       "groups": [],
+      "savedPost": [
+        "1",
+        "2",
+        "4"
+      ],
       "id": 804,
       "banner": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
       "avatar": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
@@ -285,7 +290,7 @@
       "friends": [],
       "follows": [],
       "groups": [],
-      "id": 6441,
+      "id": "6441",
       "savedPost": [
         "1",
         "2",
@@ -294,154 +299,323 @@
       "banner": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
       "avatar": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
       "created_at": "10/9/2024"
+    },
+    {
+      "userName": "dung123",
+      "password": "U2FsdGVkX180OVwwYbx92+BlqmAULgQvwxWUjNfe7kI=",
+      "email": "dungpham19237qn@gmail.com",
+      "name": "dung pham",
+      "friends": [],
+      "follows": [],
+      "groups": [],
+      "hasLiked": [],
+      "hasBookmarked": [
+        "2e18ed40-d1d8-42e7-9dec-7c48e2fcb5bf"
+      ],
+      "savedPost": [],
+      "id": "7621",
+      "banner": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
+      "avatar": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
+      "created_at": "15/9/2024"
     }
   ],
   "posts": [
     {
-      "id": "1",
-      "title": "A Day in the Mountains",
-      "content": "Hiking in the mountains was incredible. The view was amazing!",
-      "idUser": "6441",
+      "id": "2e18ed40-d1d8-42e7-9dec-7c48e2fcb5bf",
+      "title": "111",
+      "idUser": "7621",
       "carouselMedia": [
         {
           "index": 1,
-          "title": "Mountain View",
-          "mediaUrl": "https://picsum.photos/seed/mountain/800/600",
-          "type": "image"
-        },
-        {
-          "index": 2,
-          "title": "Hiking Trail",
-          "mediaUrl": "https://picsum.photos/seed/trail/800/600",
+          "mediaUrl": "https://firebasestorage.googleapis.com/v0/b/online-social-bafa3.appspot.com/o/images%2Fimage-1726357202505.jpg?alt=media&token=26640278-6a67-46e2-9915-af003fffbd36",
           "type": "image"
         }
       ],
-      "profilePictureUrl": "https://picsum.photos/seed/user1/200/200",
-      "userName": "NatureLover",
-      "createdAt": "2024-09-05T14:48:00.000Z",
-      "updatedAt": "2024-09-06T10:30:00.000Z",
-      "likeCount": 120,
-      "hasLiked": true,
-      "comments": [
+      "createdAt": 1726357203393,
+      "likeCount": 0,
+      "commentsById": []
+    },
+    {
+      "id": "94d3618d-edac-4fd0-91f4-c20834db4a30",
+      "title": "3333",
+      "idUser": "7621",
+      "carouselMedia": [
         {
-          "id": 1,
-          "userName": "JohnDoe",
-          "profilePictureUrl": "https://picsum.photos/seed/johndoe/100/100",
-          "content": "Wow, looks so peaceful!",
-          "createdAt": "2024-09-05T16:20:00.000Z"
-        },
-        {
-          "id": 2,
-          "userName": "JaneDoe",
-          "profilePictureUrl": "https://picsum.photos/seed/janedoe/100/100",
-          "content": "Amazing view! I wish I were there!",
-          "createdAt": "2024-09-05T18:45:00.000Z"
+          "index": 1,
+          "mediaUrl": "https://firebasestorage.googleapis.com/v0/b/online-social-bafa3.appspot.com/o/images%2Fimage-1726357396400.jpg?alt=media&token=7c3d0c79-a6e0-4955-871e-d939f61d7f33",
+          "type": "image"
         }
+      ],
+      "createdAt": 1726357397026,
+      "likeCount": 0,
+      "commentsById": [
+        "ddf55c9c-b64a-4102-9889-69d1bc313ea1",
+        "6a54b777-0fd1-46eb-aba0-4b9405fe1482",
+        "9fd9c73f-ed9e-4d61-bc66-eccf11390917",
+        "09245f1c-37bd-4a8a-a26d-35dfac409abf",
+        "a117aa64-67e1-462b-b2ea-a85b28756f20",
+        "f28b31cd-d904-4d90-9d50-2817c7ddc911",
+        "3f610171-b87b-426e-a875-0c48aa926eb3",
+        "fded557f-bb79-4725-8529-e127a1cb5cae",
+        "83ad5301-bbc1-4e1e-9f75-fa565ce87f9a"
+      ]
+    }
+  ],
+  "commentsChild": [
+    {
+      "id": "91024eee-89be-41d2-a495-7594f8f2e8aa",
+      "idUser": "7621",
+      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
+      "userNameUser": "dung123",
+      "postId": "94d3618d-edac-4fd0-91f4-c20834db4a30",
+      "idParent": "ddf55c9c-b64a-4102-9889-69d1bc313ea1",
+      "userNameParent": "dung123",
+      "detail": "@dung123 ",
+      "date": 1726494127214
+    }
+  ],
+  "commentsParent": [
+    {
+      "id": "c31e4370-afa4-44f1-a6ee-b41ebad5c6db",
+      "idUser": "7621",
+      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
+      "userNameUser": "dung123",
+      "postId": "",
+      "detail": "12332",
+      "date": 1726487087834,
+      "commentsById": []
+    },
+    {
+      "id": "399927d4-3514-42ba-9e00-199959eaf85a",
+      "idUser": "7621",
+      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
+      "userNameUser": "dung123",
+      "postId": "",
+      "detail": "123",
+      "date": 1726487393726,
+      "commentsById": []
+    },
+    {
+      "id": "835e813c-a3ed-48d8-af61-227dd47568d3",
+      "idUser": "7621",
+      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
+      "userNameUser": "dung123",
+      "postId": "",
+      "detail": "123123",
+      "date": 1726487396443,
+      "commentsById": []
+    },
+    {
+      "id": "5094a027-918e-4935-a85f-05cbe8fbe2ba",
+      "idUser": "7621",
+      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
+      "userNameUser": "dung123",
+      "postId": "",
+      "detail": "123123",
+      "date": 1726487762301,
+      "commentsById": []
+    },
+    {
+      "id": "2a583c89-eb48-44fd-89ad-9b55122b9af2",
+      "idUser": "7621",
+      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
+      "userNameUser": "dung123",
+      "postId": "",
+      "detail": "3232",
+      "date": 1726487791362,
+      "commentsById": []
+    },
+    {
+      "id": "ddf55c9c-b64a-4102-9889-69d1bc313ea1",
+      "idUser": "7621",
+      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
+      "userNameUser": "dung123",
+      "postId": "",
+      "detail": "123",
+      "date": 1726487864019,
+      "commentsById": [
+        "91024eee-89be-41d2-a495-7594f8f2e8aa"
       ]
     },
     {
-      "id": "2",
-      "title": "Delicious Homemade Pizza",
-      "content": "Tried making pizza at home for the first time, and it turned out great!",
-      "idUser": "6441",
-      "carouselMedia": [
-        {
-          "index": 1,
-          "title": "Pizza Ready",
-          "mediaUrl": "https://picsum.photos/seed/pizza/800/600",
-          "type": "image"
-        },
-        {
-          "index": 2,
-          "title": "Pizza in the Oven",
-          "mediaUrl": "https://picsum.photos/seed/oven/800/600",
-          "type": "image"
-        }
-      ],
-      "profilePictureUrl": "https://picsum.photos/seed/user2/200/200",
-      "userName": "FoodieBaker",
-      "createdAt": "2024-09-01T12:30:00.000Z",
-      "likeCount": 250,
-      "hasLiked": false,
-      "comments": [
-        {
-          "id": 1,
-          "userName": "PizzaLover",
-          "profilePictureUrl": "https://picsum.photos/seed/pizzalover/100/100",
-          "content": "Looks delicious! What's your secret?",
-          "createdAt": "2024-09-01T14:50:00.000Z"
-        }
-      ]
+      "id": "bca14168-3b13-4b5b-b79f-88509896f5f9",
+      "idUser": "7621",
+      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
+      "userNameUser": "dung123",
+      "postId": "94d3618d-edac-4fd0-91f4-c20834db4a30",
+      "detail": "123",
+      "date": 1726489103384,
+      "commentsById": []
     },
     {
-      "id": "3",
-      "title": "Sunset at the Beach",
-      "content": "Caught the perfect sunset yesterday. Nature never fails to amaze!",
-      "idUser": "6441",
-      "carouselMedia": [
-        {
-          "index": 1,
-          "title": "Beach Sunset",
-          "mediaUrl": "https://picsum.photos/seed/sunset/800/600",
-          "type": "image"
-        }
-      ],
-      "profilePictureUrl": "https://picsum.photos/seed/user3/200/200",
-      "userName": "BeachVibes",
-      "createdAt": "2024-08-28T18:00:00.000Z",
-      "likeCount": 340,
-      "hasLiked": true,
-      "comments": [
-        {
-          "id": 1,
-          "userName": "SeaLover",
-          "profilePictureUrl": "https://picsum.photos/seed/sealover/100/100",
-          "content": "Absolutely stunning!",
-          "createdAt": "2024-08-28T19:30:00.000Z"
-        },
-        {
-          "id": 2,
-          "userName": "SunChaser",
-          "profilePictureUrl": "https://picsum.photos/seed/sunchaser/100/100",
-          "content": "This is pure beauty!",
-          "createdAt": "2024-08-28T20:15:00.000Z"
-        }
-      ]
+      "id": "52d9729d-b473-4536-956e-b96f9df9597c",
+      "idUser": "7621",
+      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
+      "userNameUser": "dung123",
+      "postId": "94d3618d-edac-4fd0-91f4-c20834db4a30",
+      "detail": "32323",
+      "date": 1726489105903,
+      "commentsById": []
     },
     {
-      "id": "4",
-      "title": "Sunset at the Beach",
-      "content": "Caught the perfect sunset yesterday. Nature never fails to amaze!",
-      "idUser": "6441",
-      "carouselMedia": [
-        {
-          "index": 1,
-          "title": "Beach Sunset",
-          "mediaUrl": "https://picsum.photos/seed/sunset/800/600",
-          "type": "image"
-        }
-      ],
-      "profilePictureUrl": "https://picsum.photos/seed/user3/200/200",
-      "userName": "BeachVibes",
-      "createdAt": "2024-08-28T18:00:00.000Z",
-      "likeCount": 340,
-      "hasLiked": true,
-      "comments": [
-        {
-          "id": 1,
-          "userName": "SeaLover",
-          "profilePictureUrl": "https://picsum.photos/seed/sealover/100/100",
-          "content": "Absolutely stunning!",
-          "createdAt": "2024-08-28T19:30:00.000Z"
-        },
-        {
-          "id": 2,
-          "userName": "SunChaser",
-          "profilePictureUrl": "https://picsum.photos/seed/sunchaser/100/100",
-          "content": "This is pure beauty!",
-          "createdAt": "2024-08-28T20:15:00.000Z"
-        }
-      ]
+      "id": "6a54b777-0fd1-46eb-aba0-4b9405fe1482",
+      "idUser": "7621",
+      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
+      "userNameUser": "dung123",
+      "postId": "94d3618d-edac-4fd0-91f4-c20834db4a30",
+      "detail": "123",
+      "date": 1726489107565,
+      "commentsById": []
+    },
+    {
+      "id": "2b3a71e0-2306-48c3-bb80-ae6368a23dfe",
+      "idUser": "7621",
+      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
+      "userNameUser": "dung123",
+      "postId": "94d3618d-edac-4fd0-91f4-c20834db4a30",
+      "detail": "23323",
+      "date": 1726489114104,
+      "commentsById": []
+    },
+    {
+      "id": "9fd9c73f-ed9e-4d61-bc66-eccf11390917",
+      "idUser": "7621",
+      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
+      "userNameUser": "dung123",
+      "postId": "94d3618d-edac-4fd0-91f4-c20834db4a30",
+      "detail": "111",
+      "date": 1726489118011,
+      "commentsById": []
+    },
+    {
+      "id": "09245f1c-37bd-4a8a-a26d-35dfac409abf",
+      "idUser": "7621",
+      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
+      "userNameUser": "dung123",
+      "postId": "94d3618d-edac-4fd0-91f4-c20834db4a30",
+      "detail": "3",
+      "date": 1726489122605,
+      "commentsById": []
+    },
+    {
+      "id": "af51d169-e03a-41af-8352-4d8db3f005c9",
+      "idUser": "7621",
+      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
+      "userNameUser": "dung123",
+      "postId": "94d3618d-edac-4fd0-91f4-c20834db4a30",
+      "detail": "1",
+      "date": 1726490499133,
+      "commentsById": []
+    },
+    {
+      "id": "0613826c-e0de-4566-94f0-6f2e91541406",
+      "idUser": "7621",
+      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
+      "userNameUser": "dung123",
+      "postId": "94d3618d-edac-4fd0-91f4-c20834db4a30",
+      "detail": "1",
+      "date": 1726490500903,
+      "commentsById": []
+    },
+    {
+      "id": "a117aa64-67e1-462b-b2ea-a85b28756f20",
+      "idUser": "7621",
+      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
+      "userNameUser": "dung123",
+      "postId": "94d3618d-edac-4fd0-91f4-c20834db4a30",
+      "detail": "2",
+      "date": 1726490502361,
+      "commentsById": []
+    },
+    {
+      "id": "18c55dc4-2337-46dc-ac48-4c3683d2708a",
+      "idUser": "7621",
+      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
+      "userNameUser": "dung123",
+      "postId": "94d3618d-edac-4fd0-91f4-c20834db4a30",
+      "detail": "9",
+      "date": 1726491576990,
+      "commentsById": []
+    },
+    {
+      "id": "f28b31cd-d904-4d90-9d50-2817c7ddc911",
+      "idUser": "7621",
+      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
+      "userNameUser": "dung123",
+      "postId": "94d3618d-edac-4fd0-91f4-c20834db4a30",
+      "detail": "1",
+      "date": 1726491583848,
+      "commentsById": []
+    },
+    {
+      "id": "4eacce9c-3100-417f-bab7-528169113ef8",
+      "idUser": "7621",
+      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
+      "userNameUser": "dung123",
+      "postId": "94d3618d-edac-4fd0-91f4-c20834db4a30",
+      "detail": "",
+      "date": 1726491586886,
+      "commentsById": []
+    },
+    {
+      "id": "16bc8372-d3a1-4738-8819-60d2454fea3c",
+      "idUser": "7621",
+      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
+      "userNameUser": "dung123",
+      "postId": "94d3618d-edac-4fd0-91f4-c20834db4a30",
+      "detail": "1",
+      "date": 1726491588549,
+      "commentsById": []
+    },
+    {
+      "id": "eeede360-5385-4250-9211-9a8a6489ff7b",
+      "idUser": "7621",
+      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
+      "userNameUser": "dung123",
+      "postId": "94d3618d-edac-4fd0-91f4-c20834db4a30",
+      "detail": "1",
+      "date": 1726491590405,
+      "commentsById": []
+    },
+    {
+      "id": "8cc5ccad-f9f3-4b11-8148-89cca92b69dc",
+      "idUser": "7621",
+      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
+      "userNameUser": "dung123",
+      "postId": "94d3618d-edac-4fd0-91f4-c20834db4a30",
+      "detail": "1",
+      "date": 1726491591440,
+      "commentsById": []
+    },
+    {
+      "id": "3f610171-b87b-426e-a875-0c48aa926eb3",
+      "idUser": "7621",
+      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
+      "userNameUser": "dung123",
+      "postId": "94d3618d-edac-4fd0-91f4-c20834db4a30",
+      "detail": "1",
+      "date": 1726491592381,
+      "commentsById": []
+    },
+    {
+      "id": "fded557f-bb79-4725-8529-e127a1cb5cae",
+      "idUser": "7621",
+      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
+      "userNameUser": "dung123",
+      "postId": "94d3618d-edac-4fd0-91f4-c20834db4a30",
+      "detail": "1",
+      "date": 1726491598540,
+      "commentsById": []
+    },
+    {
+      "id": "83ad5301-bbc1-4e1e-9f75-fa565ce87f9a",
+      "idUser": "7621",
+      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
+      "userNameUser": "dung123",
+      "postId": "94d3618d-edac-4fd0-91f4-c20834db4a30",
+      "detail": "99999",
+      "date": 1726492502094,
+      "commentsById": []
     }
   ]
 }

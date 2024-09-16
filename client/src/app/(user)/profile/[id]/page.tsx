@@ -185,9 +185,9 @@ export default function Page({ params }: { params: { id: string } }) {
                 </div>
               </div>
               <img
-                className="object-cover h-full"
+                className="object-cover h-full min-h-[380px]"
                 src={
-                  (post.carouselMedia && post.carouselMedia[index]?.mediaUrl) ||
+                  (post.carouselMedia && post.carouselMedia[0]?.mediaUrl) ||
                   "https://picsum.photos/seed/default/1024/1280"
                 }
                 alt={`post ${index}`}

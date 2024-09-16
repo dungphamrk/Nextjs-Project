@@ -1,103 +1,83 @@
 "use client";
+import { CommentModal } from "@/app/components/modal/CommentModal";
 import RightNavbar from "@/app/components/navbar/RightNavbar";
-import Post, { PostCard } from "@/app/components/Post";
-import { useState } from "react";
-
-const samplePost: PostCard[] = [
-  {
-    id: "2",
-    userName: "john_doe",
-    profilePictureUrl:
-      "https://th.bing.com/th/id/OIP.n2J-te2edVD91F8w6udMmgHaHa?rs=1&pid=ImgDetMain",
-    createdAt: "2024-09-05",
-    carouselMedia: [
-      {
-        index: 0,
-        title: "Beautiful Sunset",
-        mediaUrl:
-          "https://th.bing.com/th/id/OIP.n2J-te2edVD91F8w6udMmgHaHa?rs=1&pid=ImgDetMain",
-        type: "image",
-      },
-      {
-        index: 1,
-        title: "Mountain Hike",
-        mediaUrl:
-          "https://th.bing.com/th/id/OIP.n2J-te2edVD91F8w6udMmgHaHa?rs=1&pid=ImgDetMain",
-        type: "video",
-      },
-    ],
-    caption: "Đây là chú thích của bài viết!",
-    commentCount: 15,
-    likeCount: 120,
-    hasLiked: false,
-    hasBookmarked: false,
-  },
-  {
-    id: "1",
-    userName: "john_doe",
-    profilePictureUrl:
-      "https://th.bing.com/th/id/OIP.n2J-te2edVD91F8w6udMmgHaHa?rs=1&pid=ImgDetMain",
-    createdAt: "2024-09-05",
-    carouselMedia: [
-      {
-        index: 0,
-        title: "Beautiful Sunset",
-        mediaUrl:
-          "https://th.bing.com/th/id/OIP.n2J-te2edVD91F8w6udMmgHaHa?rs=1&pid=ImgDetMain",
-        type: "image",
-      },
-      {
-        index: 1,
-        title: "Mountain Hike",
-        mediaUrl:
-          "https://th.bing.com/th/id/OIP.n2J-te2edVD91F8w6udMmgHaHa?rs=1&pid=ImgDetMain",
-        type: "video",
-      },
-    ],
-    caption: "Đây là chú thích của bài viết!",
-    commentCount: 15,
-    likeCount: 120,
-    hasLiked: false,
-    hasBookmarked: false,
-  },
-];
+import Post from "@/app/components/Post";
+import { ModalSize, PostCard, User } from "@/app/interfaces/types";
+import { getAllPost, PostState } from "@/app/store/reducers/postsSlice";
+import { updateUser, UserState } from "@/app/store/reducers/userSlice";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
 
 export default function Home() {
-  const [posts, setPosts] = useState<PostCard[]>(samplePost);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const posts = useSelector((state: { posts: PostState }) => state.posts.Posts);
+  const [currentUser, setCurrentUser] = useState<User | undefined>(undefined);
+  const users = useSelector((state: { users: UserState }) => state.users.users);
+  const[activePost,setActivePost]=useState<PostCard>(posts[0]);
+  const dispatch = useDispatch();
+  const router= useRouter();
 
-  const handlePostLike = (post: PostCard) => {
-    setPosts((prevPosts) =>
-      prevPosts.map((p) =>
-        p.id === post.id ? { ...p, hasLiked: !p.hasLiked } : p
-      )
-    );
+  useEffect(() => {
+    dispatch(getAllPost());
+  }, []);
+  useEffect(() => {
+    const userId = localStorage.getItem("currentUserId");
+    if (userId) {
+      const findId = JSON.parse(userId);
+      const findedUser = users.find((user) => user?.id === findId);
+      setCurrentUser(findedUser);
+    }else {
+      Swal.fire("Vui lòng đăng nhập trước");
+      router.push("login")
+    }
+  }, [users]);
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
-
+  const handlePostLike = (currentUser: User) => {
+    dispatch(updateUser(currentUser));
+    console.log(currentUser);
+    
+  };
+  const handleBookmark = (currentUser: User) => {
+    dispatch(updateUser(currentUser));
+  };
   const handleOpenCommentModal = (post: PostCard) => {
-    console.log("Open comments for", post.carouselMedia);
+    setActivePost(post);
+    setIsModalOpen(true)
   };
-
   const handlePostComment = (comment: string, postId: string) => {
     console.log(`Comment "${comment}" added to post ${postId}`);
   };
 
+
+
+  
+
   return (
     <>
-        <div className="w-full flex justify-evenly sm:mt-10 ">
-          <div className="flex flex-col w-full md:w-[600px] gap-9 space-y-4 overflow-y-scroll no-scrollbar px-4">
-            {posts.map((post) => (
-              <Post
-                key={post.id}
-                post={post}
-                onOpenCommentModal={handleOpenCommentModal}
-                onPostLike={handlePostLike}
-                onPostComment={handlePostComment}
-                onPostBookmark={handleOpenCommentModal}
-              />
-            ))}
-          </div>  
-           <RightNavbar />
+      <div className="w-full flex justify-evenly sm:mt-10 ">
+        <div className="flex flex-col w-full md:w-[600px] gap-9 space-y-4 overflow-y-scroll no-scrollbar px-4">
+          {posts.map((post) => (
+            <Post
+              key={post.id}
+              post={post}
+              users={users}
+              currentUser={currentUser}
+              onOpenCommentModal={handleOpenCommentModal}
+              onPostLike={handlePostLike}
+              onPostComment={handlePostComment}
+              onPostBookmark={handleBookmark}
+            />
+          ))} 
         </div>
+      
+        <RightNavbar />
+         <CommentModal onClose={closeModal} activePost={activePost}  isToggled={isModalOpen} />
+      </div>
     </>
   );
 }

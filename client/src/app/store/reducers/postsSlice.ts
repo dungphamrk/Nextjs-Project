@@ -124,7 +124,7 @@ const PostSlice = createSlice({
 
 
     .addCase(getAllPost.fulfilled, (state,action) => {
-      state.Posts=action.payload;
+      state.Posts=action.payload.reverse();
     })
       .addCase(fetchPaginatedPosts.pending, (state) => {
         state.loading = true;
@@ -146,6 +146,8 @@ const PostSlice = createSlice({
       .addCase(
         addPost.fulfilled,
         (state, action: PayloadAction<PostCard>) => {
+          console.log(action.payload);
+          
           state.Posts.push(action.payload);
           state.loading = false;
         }

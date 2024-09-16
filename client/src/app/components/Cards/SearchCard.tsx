@@ -5,6 +5,7 @@ import { FC } from 'react';
 // Define the TypeScript interface for the props
 interface SearchCardProps {
   searchResult: {
+    id:string;
     userName: string;
     avatar: string;
     bio?: string;
@@ -16,13 +17,13 @@ const SearchCard: FC<SearchCardProps> = ({ searchResult }) => {
   
   const router = useRouter();
 
-  const goToUserProfile = (userName: string) => {
-    router.push(`/profile/${userName}?isSelf=0`);
+  const goToUserProfile = (id: string) => {
+    router.push(`/profile/${id}`);
   };
 
   return (
     <div
-      onClick={() => goToUserProfile(searchResult.userName)}
+      onClick={() => goToUserProfile(searchResult.id)}
       className="rounded-lg flex items-center space-x-2 w-full p-2 h-12 cursor-pointer"
     >
       <div className="flex-none">

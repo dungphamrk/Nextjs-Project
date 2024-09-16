@@ -13,34 +13,26 @@ import {
   faComment as faCommentRegular,
   faHeart as faHeartRegular,
 } from "@fortawesome/free-regular-svg-icons"; // Import biểu tượng bookmark rỗng
-import EmojiPickerModal from "./modal/EmojiPickerModal";
 import MediaCarousel from "./MediaCarousel";
-import { PostMedia } from "@/app/interfaces/types";
-
-export interface PostCard {
-  id: string;
-  userName: string;
-  profilePictureUrl: string;
-  createdAt: string;
-  carouselMedia: PostMedia[];
-  caption: string;
-  commentCount: number;
-  likeCount: number;
-  hasLiked: boolean;
-  hasBookmarked: boolean; // Trạng thái bookmark
-}
+import { PostCard, PostMedia, User } from "@/app/interfaces/types";
+import Swal from "sweetalert2";
+import { convertTime } from "../interfaces/convertTime";
 
 interface PostProps {
   post: PostCard;
+  currentUser:User | undefined;
   isCommentAreaVisible?: boolean;
+  users:User[];
   onOpenCommentModal: (post: PostCard) => void;
-  onPostLike: (post: PostCard) => void;
-  onPostBookmark: (post: PostCard) => void; // Callback khi bookmark
+  onPostLike: (user: User) => void;
+  onPostBookmark: (user: User) => void; // Callback khi bookmark
   onPostComment: (comment: string, postId: string) => void;
 }
 
 const Post: React.FC<PostProps> = ({
   post,
+  users,
+  currentUser,
   isCommentAreaVisible = true,
   onOpenCommentModal,
   onPostLike,
@@ -51,15 +43,26 @@ const Post: React.FC<PostProps> = ({
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 0
   );
-  const [hasLiked, setHasLiked] = useState(post.hasLiked);
-  const [hasBookmarked, setHasBookmarked] = useState(post.hasBookmarked); // Trạng thái bookmark
-
+  const [hasLiked, setHasLiked] = useState(() => {
+    return currentUser && Array.isArray(currentUser.hasLiked)
+      ? currentUser.hasLiked.includes(post.id)
+      : false;
+  });
+  const [hasBookmarked, setHasBookmarked] = useState(() => {
+    return currentUser && Array.isArray(currentUser.hasBookmarked)
+      ? currentUser.hasBookmarked.includes(post.id)
+      : false;
+  });  // Trạng thái bookmark
+  const [userOfPost,setUserOfPost] = useState<User|undefined>(undefined);
   const router = useRouter();
 
   const handleResize = () => {
     setWindowWidth(window.innerWidth);
   };
-
+  useEffect(() => {
+    // Tìm kiếm người dùng dựa trên post.idUser
+    setUserOfPost(users.find((item) => post.idUser === item.id));
+  }, [post.idUser, users]);
   useEffect(() => {
     window.addEventListener("resize", handleResize);
     return () => {
@@ -68,13 +71,41 @@ const Post: React.FC<PostProps> = ({
   }, []);
 
   const handleLike = () => {
-    setHasLiked(!hasLiked);
-    onPostLike({ ...post, hasLiked: !hasLiked });
+    if (currentUser) {
+      const updatedHasLiked = Array.isArray(currentUser.hasLiked)
+        ? currentUser.hasLiked.includes(post.id)
+          ? currentUser.hasLiked.filter(id => id !== post.id) // Xóa post.id nếu đã tồn tại
+          : [...currentUser.hasLiked, post.id] // Thêm post.id nếu chưa tồn tại
+        : [post.id]; // Khởi tạo mảng với post.id nếu chưa có mảng hasLiked
+    
+      setHasLiked(!hasLiked);
+      onPostLike({
+        ...currentUser,
+        hasLiked: updatedHasLiked
+      });
+    }else{
+      Swal.fire("Vui lòng đăng nhập để sử dụng tính năng này");
+    }
   };
 
   const handleBookmark = () => {
-    setHasBookmarked(!hasBookmarked); // Đổi trạng thái bookmark
-    onPostBookmark({ ...post, hasBookmarked: !hasBookmarked }); // Truyền post với trạng thái bookmark mới
+    if (currentUser) {
+      const updatedBookmarked = Array.isArray(currentUser.hasBookmarked)
+        ? currentUser.hasBookmarked.includes(post.id)
+          ? currentUser.hasBookmarked.filter(id => id !== post.id) // Xóa post.id nếu đã tồn tại trong bookmarked
+          : [...currentUser.hasBookmarked, post.id] // Thêm post.id nếu chưa tồn tại trong bookmarked
+        : [post.id]; // Khởi tạo mảng với post.id nếu chưa có mảng bookmarked
+    
+      setHasBookmarked(!hasBookmarked);
+      onPostBookmark({
+        ...currentUser,
+        hasBookmarked: updatedBookmarked
+      });
+    }
+    
+    else{
+      Swal.fire("Vui lòng đăng nhập để sử dụng tính năng này");
+    }
   };
 
   const handleCommentSubmit = () => {
@@ -82,13 +113,12 @@ const Post: React.FC<PostProps> = ({
     setComment("");
   };
 
-  const appendEmoji = (emoji: string) => {
-    setComment(comment + emoji);
-  };
 
-  const goToUserProfile = (userName: string) => {
+
+  const goToUserProfile = (userName: string |undefined) => {
     router.push(`/profile/${userName}?isSelf=0`);
   };
+  
 
   return (
     <div className="flex flex-col  h-full space-y-2 sm:space-y-0 no-scrollbar">
@@ -96,25 +126,25 @@ const Post: React.FC<PostProps> = ({
       <div className="flex rounded-lg space-x-2 justify-between pb-5">
         <div
           className="flex space-x-2"
-          onClick={() => goToUserProfile(post.userName)}
+          onClick={() => goToUserProfile( userOfPost?.name)}
         >
           <div className="story-avatar">
             <a href="#" className="block bg-white rounded-full relative">
               <img
                 className="w-8 h-8 rounded-full object-cover p-0.5 bg-black"
-                src={post.profilePictureUrl}
+                src={userOfPost?.avatar}
               />
             </a>
           </div>
           <div className="flex pt-1">
             <div className="cursor-pointer font-sans text-sm font-semibold text-white self-center">
-              {post.userName}
+              {userOfPost?.name}
             </div>
             <div className="text-gray-500 w-5 font-sans text-md font-semibold self-center px-2">
               •
             </div>
             <div className="font-sans text-sm font-light text-[#949494] self-center">
-              {post.createdAt}
+              { convertTime((new Date().getTime()-post.createdAt)/60000)}
             </div>
           </div>
         </div>
@@ -125,7 +155,7 @@ const Post: React.FC<PostProps> = ({
 
       {/* Media */}
       <div className="min-h-72  px-0.5">
-        {post.carouselMedia && <MediaCarousel medias={post.carouselMedia} />}
+        {post.carouselMedia && <MediaCarousel mediaItems={post.carouselMedia} />}
       </div>
 
       {/* Actions */}
@@ -135,7 +165,7 @@ const Post: React.FC<PostProps> = ({
             <FontAwesomeIcon icon={hasLiked ? faHeart : faHeartRegular} />{" "}
             {/* Thay đổi icon like */}
           </span>
-          <span className="cursor-pointer hover:scale-90">
+          <span className="cursor-pointer hover:scale-90" onClick={()=>onOpenCommentModal(post)}>
             <FontAwesomeIcon icon={faCommentRegular} />
           </span>
 
@@ -160,13 +190,13 @@ const Post: React.FC<PostProps> = ({
 
       {/* Caption */}
       <div className="font-sans text-sm text-white flex-col">
-        <p className="text-sm text-left indent-8 break-all ">{post.caption}</p>
-        {post.commentCount > 0 && (
+        <p className="text-sm text-left indent-8 break-all ">{post.title}</p>
+        {post && post.commentsById && post.commentsById?.length > 0 && (
           <p
             className="text-md text-left hidden sm:block text-gray-400 cursor-pointer"
             onClick={() => onOpenCommentModal(post)}
           >
-            View all {post.commentCount} comments
+            View all {post.commentsById?.length} comments
           </p>
         )}
       </div>
@@ -192,9 +222,7 @@ const Post: React.FC<PostProps> = ({
               Post
             </span>
           )}
-          <span className="relative cursor-pointer">
-            <EmojiPickerModal onSelectEmoji={appendEmoji} />
-          </span>
+   
         </div>
       )}
     </div>

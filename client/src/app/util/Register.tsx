@@ -94,6 +94,9 @@ export default function Register() {
         password: encryptedPassword,
         friends: [],
         follows:[],
+        hasLiked:[],
+        savedPost:[],
+        hasBookmarked:[],
         groups:[],
         id: Math.floor(Math.random() * 10000).toString(), // Random id for demo purposes
         banner:"https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",

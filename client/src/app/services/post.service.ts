@@ -14,6 +14,7 @@ export const PostService = {
     return response.data;
   },
   async addPost(Post: PostCard): Promise<PostCard> {
+    console.log(Post);
     const response = await axios.post<PostCard>(API_URL, Post);
     return response.data;
   },
