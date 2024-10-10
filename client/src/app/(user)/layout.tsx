@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import SideNavbar from "../components/navbar/SideNavbar";
 

@@ -1,4 +1,5 @@
 "use client";
+import { CommentModal } from "@/app/components/modal/CommentModal";
 import { PostCard, User } from "@/app/interfaces/types";
 import { getAllPost, PostState } from "@/app/store/reducers/postsSlice";
 import { getAllUser, UserState } from "@/app/store/reducers/userSlice";
@@ -23,7 +24,8 @@ export default function Page({ params }: { params: { id: string } }) {
   const [renderedUser, setRenderedUser] = useState<User | undefined>(undefined);
   const dispatch = useDispatch();
   const router = useRouter();
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activePost, setActivePost] = useState<PostCard | null>(null); 
   const isCurrentUser = (idParams: string, idCurrentUser: string) => {
     return idParams == idCurrentUser;
   };
@@ -33,6 +35,12 @@ export default function Page({ params }: { params: { id: string } }) {
     dispatch(getAllUser());
     dispatch(getAllPost());
   }, [dispatch]);
+
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setActivePost(null); 
+  };
 
   // Get current user data from local storage and find the user from the state
   useEffect(() => {
@@ -49,15 +57,18 @@ export default function Page({ params }: { params: { id: string } }) {
         ? setRenderedUser(currentUser)
         : setRenderedUser(users.find((user) => user.id == id));
     }
-  }, [currentUser]);
+  }, [activeTab]);
 
   // Posts of current user
   const postOfUser = posts.filter((post) => post.idUser == renderedUser?.id);
 
   // Saved posts of current user based on savedPost array
   const savedPosts = posts.filter((post) =>
-    renderedUser?.savedPost.includes(post.id)
+    renderedUser?.hasBookmarked.includes(post.id)
   );
+
+
+  
 
   // Render posts based on activeTab
   const displayedPosts = activeTab === "POSTS" ? postOfUser : savedPosts;
@@ -173,6 +184,10 @@ export default function Page({ params }: { params: { id: string } }) {
             <div
               key={index}
               className="w-fit basis-1/3 p-0.5 relative hover:brightness-75 group hover:cursor-pointer"
+              onClick={() => {
+                setActivePost(post); // Set the active post ID when clicking
+                setIsModalOpen(true);
+              }}
             >
               <div className="flex absolute space-x-4 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:group-hover:visible invisible">
                 <div className="flex font-bold text-white text-md space-x-1">
@@ -181,7 +196,7 @@ export default function Page({ params }: { params: { id: string } }) {
                 </div>
                 <div className="flex font-bold text-white text-md space-x-1">
                   <FontAwesomeIcon icon={faComment} />
-                  <span>{post.comments?.length || 0}</span>
+                  <span>{post.commentsById?.length || 0}</span>
                 </div>
               </div>
               <img
@@ -191,11 +206,14 @@ export default function Page({ params }: { params: { id: string } }) {
                   "https://picsum.photos/seed/default/1024/1280"
                 }
                 alt={`post ${index}`}
-              />
+              />   
             </div>
           ))}
         </div>
       </div>
+    {activePost && (
+                <CommentModal onClose={closeModal} activePost={activePost} isToggled={isModalOpen} />
+              )}
     </div>
   );
 }

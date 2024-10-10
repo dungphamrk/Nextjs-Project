@@ -27,16 +27,13 @@ export default function SignIn() {
         user.password,
         "secret_key"
       ).toString(CryptoJS.enc.Utf8);
-      console.log(decryptedPassword);
       
       return user.userName === account && decryptedPassword === password;
     });
 
     if (user) {
       localStorage.setItem("currentUserId", JSON.stringify(user.id));
-
       router.push("/home");
-      location.reload();
     } else {
       setError("Invalid username or password");
     }

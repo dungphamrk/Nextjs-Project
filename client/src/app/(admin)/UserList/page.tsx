@@ -8,14 +8,14 @@ import {
   closeModal,
   fetchPaginatedUsers,
   UserState,
-} from "../../store/reducers/userSlice";
+} from "@/app/store/reducers/userSlice";
 import {
   CaretDownOutlined,
   CaretUpOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
 import Modal from "@/app/components/modal/Modal";
-import { User } from "../../interfaces/types";
+import { User } from "@/app/interfaces/types";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import Swal from "sweetalert2";
 const page: React.FC = () => {
@@ -64,8 +64,6 @@ const page: React.FC = () => {
       });
     }
 
- 
-
   };
 
   const toggleRole = (id: string) => {
@@ -112,20 +110,22 @@ const page: React.FC = () => {
   const [currentUserId, setCurrentUserId] = useState<string | null>(null);
   const [userForm, setUserForm] = useState<User>({
     id: "",
-    name: "",
     userName: "",
-    savedPost:[],
     email: "",
-    status:false,
-    password: "",
+    status: false,
+    role: false,
+    name: "",
     avatar: "",
-    role:false,
-    created_at: "",
     banner: "",
     bio: "",
+    password: "",
+    savedPost: [],
+    hasLiked: [],
+    hasBookmarked: [],
     follows: [],
     friends: [],
     groups: [],
+    created_at: ""
   });
   const [sortField, setSortField] = useState<string>("id");
   const [sortDirection, setSortDirection] = useState<string>("asc");

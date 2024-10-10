@@ -4,7 +4,7 @@ import MediaCarousel from "@/app/components/MediaCarousel";
 import { PostCard, PostMedia, User } from "@/app/interfaces/types";
 import { faEllipsisH, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { addPost, updatePost } from "@/app/store/reducers/postsSlice";
+import { addPost, getAllPost, updatePost } from "@/app/store/reducers/postsSlice";
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUser, UserState } from "@/app/store/reducers/userSlice";
@@ -86,11 +86,6 @@ const onSaveDescription = async () => {
         updatePost({
           ...activePost,
           title: description,
-          carouselMedia: imageUrls.map((url, index) => ({
-            index: index + 1,
-            mediaUrl: url,
-            type: "image",
-          })),
         })
       );
     } else {
@@ -107,7 +102,8 @@ const onSaveDescription = async () => {
           })),
           createdAt: new Date().getTime(),
           likeCount: 0,
-          comments: [],
+          commentsById: [],
+          status:true
         })
       );
     }

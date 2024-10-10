@@ -1,270 +1,10 @@
 {
   "users": [
     {
-      "id": 1,
-      "userName": "john_doe",
-      "email": "john@example.com",
-      "name": "John Doe",
-      "status": true,
-      "role": false,
-      "password": "12345678",
-      "avatar": "https://example.com/profiles/john.jpg",
-      "banner": "https://example.com/profiles/john.jpg",
-      "bio": "Web developer and coffee enthusiast.",
-      "follows": [
-        {
-          "userId": 1,
-          "created_at": "2024-02-20T11:00:00Z"
-        }
-      ],
-      "friends": [
-        {
-          "userId": 1,
-          "add_at": "2024-02-20T11:00:00Z"
-        }
-      ],
-      "groups": [],
-      "created_at": "2024-01-15T08:00:00Z"
-    },
-    {
-      "id": 2,
-      "userName": "jane_smith",
-      "email": "jane@example.com",
-      "name": "Jane Smith",
-      "password": "12345678",
-      "status": true,
-      "role": false,
-      "avatar": "https://example.com/profiles/jane.jpg",
-      "banner": "https://example.com/profiles/jane.jpg",
-      "bio": "Graphic designer and art lover.",
-      "follows": [
-        {
-          "userId": 2,
-          "created_at": "2024-02-21T09:00:00Z"
-        }
-      ],
-      "friends": [
-        {
-          "userId": 2,
-          "add_at": "2024-02-21T09:00:00Z"
-        }
-      ],
-      "groups": [],
-      "created_at": "2024-01-16T07:00:00Z"
-    },
-    {
-      "id": 3,
-      "userName": "mike_ross",
-      "email": "mike@example.com",
-      "name": "Mike Ross",
-      "password": "12345678",
-      "status": true,
-      "role": false,
-      "avatar": "https://example.com/profiles/mike.jpg",
-      "banner": "https://example.com/profiles/mike.jpg",
-      "bio": "Lawyer and chess enthusiast.",
-      "follows": [
-        {
-          "userId": 3,
-          "created_at": "2024-02-22T10:30:00Z"
-        }
-      ],
-      "friends": [
-        {
-          "userId": 3,
-          "add_at": "2024-02-22T10:30:00Z"
-        }
-      ],
-      "groups": [],
-      "created_at": "2024-01-17T09:30:00Z"
-    },
-    {
-      "id": 4,
-      "userName": "sarah_connor",
-      "email": "sarah@example.com",
-      "name": "Sarah Connor",
-      "password": "12345678",
-      "status": true,
-      "role": false,
-      "avatar": "https://example.com/profiles/sarah.jpg",
-      "banner": "https://example.com/profiles/sarah.jpg",
-      "bio": "Fitness coach and survivalist.",
-      "follows": [
-        {
-          "userId": 4,
-          "created_at": "2024-02-23T08:15:00Z"
-        }
-      ],
-      "friends": [
-        {
-          "userId": 4,
-          "add_at": "2024-02-23T08:15:00Z"
-        }
-      ],
-      "groups": [],
-      "created_at": "2024-01-18T06:15:00Z"
-    },
-    {
-      "id": 5,
-      "userName": "tony_stark",
-      "email": "tony@example.com",
-      "name": "Tony Stark",
-      "password": "12345678",
-      "status": true,
-      "role": false,
-      "avatar": "https://example.com/profiles/tony.jpg",
-      "banner": "https://example.com/profiles/tony.jpg",
-      "bio": "Engineer and inventor.",
-      "follows": [
-        {
-          "userId": 5,
-          "created_at": "2024-02-24T07:45:00Z"
-        }
-      ],
-      "friends": [
-        {
-          "userId": 5,
-          "add_at": "2024-02-24T07:45:00Z"
-        }
-      ],
-      "groups": [],
-      "created_at": "2024-01-19T05:45:00Z"
-    },
-    {
-      "id": 6,
-      "userName": "bruce_wayne",
-      "email": "bruce@example.com",
-      "name": "Bruce Wayne",
-      "password": "12345678",
-      "status": true,
-      "role": false,
-      "avatar": "https://example.com/profiles/bruce.jpg",
-      "banner": "https://example.com/profiles/bruce.jpg",
-      "bio": "Philanthropist and businessman.",
-      "follows": [
-        {
-          "userId": 6,
-          "created_at": "2024-02-25T12:30:00Z"
-        }
-      ],
-      "friends": [
-        {
-          "userId": 6,
-          "add_at": "2024-02-25T12:30:00Z"
-        }
-      ],
-      "groups": [],
-      "created_at": "2024-01-20T10:30:00Z"
-    },
-    {
-      "id": 7,
-      "userName": "clark_kent",
-      "email": "clark@example.com",
-      "name": "Clark Kent",
-      "password": "12345678",
-      "status": true,
-      "role": false,
-      "avatar": "https://example.com/profiles/clark.jpg",
-      "banner": "https://example.com/profiles/clark.jpg",
-      "bio": "Journalist and traveler.",
-      "follows": [
-        {
-          "userId": 7,
-          "created_at": "2024-02-26T09:45:00Z"
-        }
-      ],
-      "friends": [
-        {
-          "userId": 7,
-          "add_at": "2024-02-26T09:45:00Z"
-        }
-      ],
-      "groups": [],
-      "created_at": "2024-01-21T07:45:00Z"
-    },
-    {
-      "id": 8,
-      "userName": "diana_prince",
-      "email": "diana@example.com",
-      "name": "Diana Prince",
-      "password": "12345678",
-      "status": true,
-      "role": false,
-      "avatar": "https://example.com/profiles/diana.jpg",
-      "banner": "https://example.com/profiles/diana.jpg",
-      "bio": "Historian and diplomat.",
-      "follows": [
-        {
-          "userId": 8,
-          "created_at": "2024-02-27T11:15:00Z"
-        }
-      ],
-      "friends": [
-        {
-          "userId": 8,
-          "add_at": "2024-02-27T11:15:00Z"
-        }
-      ],
-      "groups": [],
-      "created_at": "2024-01-22T09:15:00Z"
-    },
-    {
-      "id": 9,
-      "userName": "peter_parker",
-      "email": "peter@example.com",
-      "name": "Peter Parker",
-      "password": "12345678",
-      "status": true,
-      "role": false,
-      "avatar": "https://example.com/profiles/peter.jpg",
-      "banner": "https://example.com/profiles/peter.jpg",
-      "bio": "Photographer and student.",
-      "follows": [
-        {
-          "userId": 9,
-          "created_at": "2024-02-28T10:00:00Z"
-        }
-      ],
-      "friends": [
-        {
-          "userId": 9,
-          "add_at": "2024-02-28T10:00:00Z"
-        }
-      ],
-      "groups": [],
-      "created_at": "2024-01-23T08:00:00Z"
-    },
-    {
-      "id": 10,
-      "userName": "steve_rogers",
-      "email": "steve@example.com",
-      "name": "Steve Rogers",
-      "password": "12345678",
-      "status": true,
-      "role": false,
-      "avatar": "https://example.com/profiles/steve.jpg",
-      "banner": "https://example.com/profiles/steve.jpg",
-      "bio": "Soldier and patriot.",
-      "follows": [
-        {
-          "userId": 10,
-          "created_at": "2024-03-01T12:45:00Z"
-        }
-      ],
-      "friends": [
-        {
-          "userId": 10,
-          "add_at": "2024-03-01T12:45:00Z"
-        }
-      ],
-      "groups": [],
-      "created_at": "2024-01-24T10:45:00Z"
-    },
-    {
       "userName": "dungpham197qn@gmail.com",
       "password": "U2FsdGVkX1/C6vRqhL9VYuVOi4NlRbepgyppd9K+qiM=",
       "email": "dungpham197qn@gmail.com",
-      "name": "dung pham",
+      "name": "dung pham1",
       "status": true,
       "role": false,
       "friends": [],
@@ -284,7 +24,7 @@
       "userName": "dungpham197",
       "password": "U2FsdGVkX1882qi+88JNRn9dqVEnXgEiAPulzi2GZOw=",
       "email": "dungpham197rk@gmail.com",
-      "name": "dung pham",
+      "name": "dung pham2",
       "status": true,
       "role": true,
       "friends": [],
@@ -304,19 +44,87 @@
       "userName": "dung123",
       "password": "U2FsdGVkX180OVwwYbx92+BlqmAULgQvwxWUjNfe7kI=",
       "email": "dungpham19237qn@gmail.com",
-      "name": "dung pham",
+      "name": "dung pham3",
       "friends": [],
       "follows": [],
       "groups": [],
-      "hasLiked": [],
+      "hasLiked": [
+        "7fddf660-ee00-405a-9980-447f8cbd847c",
+        "06383c22-c9d6-465d-8a37-c3b9797f79c0"
+      ],
       "hasBookmarked": [
         "2e18ed40-d1d8-42e7-9dec-7c48e2fcb5bf"
       ],
       "savedPost": [],
       "id": "7621",
+      "role": false,
       "banner": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
       "avatar": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
       "created_at": "15/9/2024"
+    },
+    {
+      "userName": "dungdemo",
+      "password": "U2FsdGVkX18wUKCFDh/h7ExJk0gq8b3SN3/F1Plb6Tg=",
+      "email": "dungpham19237qn@gmail.com",
+      "name": "dungdemo111",
+      "friends": [],
+      "follows": [],
+      "role": true,
+      "hasLiked": [
+        "e6aa3f43-21c7-484c-93bb-24659c04467a",
+        "8707ec73-e3dc-4c82-b9c1-92ca0d6c2b42",
+        "b89cd2d7-1712-4ad5-b93a-634bbe6c1885",
+        "56318a59-7704-4318-8be8-af17dd177ec3"
+      ],
+      "savedPost": [],
+      "hasBookmarked": [
+        "e6aa3f43-21c7-484c-93bb-24659c04467a",
+        "8c358be4-24ad-47ec-abc0-025d161ce18f",
+        "a2e0a718-9492-470c-80d9-ffa6696e13fc",
+        "b89cd2d7-1712-4ad5-b93a-634bbe6c1885",
+        "0e1ccfb9-0061-442b-b5c5-342390bd98f4"
+      ],
+      "groups": [],
+      "id": "4744",
+      "banner": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
+      "avatar": "https://firebasestorage.googleapis.com/v0/b/online-social-bafa3.appspot.com/o/profile-pictures%2F3.jpg?alt=media&token=99a92337-b86f-4cd4-8825-dca6bc1466a5",
+      "created_at": "17/9/2024",
+      "fullname": "dungdemo11"
+    },
+    {
+      "userName": "dungpham197qn@gmail.com",
+      "password": "U2FsdGVkX1+bw5+n/1niVdsiVht11T3ESCHw0+UurCs=",
+      "email": "nguyenvana2@gmail.com",
+      "name": "dung pham",
+      "friends": [],
+      "follows": [],
+      "hasLiked": [],
+      "savedPost": [],
+      "role": false,
+      "hasBookmarked": [],
+      "groups": [],
+      "id": "1095",
+      "banner": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
+      "avatar": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
+      "created_at": "17/9/2024"
+    },
+    {
+      "userName": "demoadmin",
+      "password": "U2FsdGVkX19b1K/fDS1M6eihbrKI0072U5bLyUw0l+g=",
+      "email": "dungpham197rk@gmail.com",
+      "name": "dung pham",
+      "friends": [],
+      "follows": [],
+      "hasLiked": [],
+      "savedPost": [],
+      "role": true,
+      "hasBookmarked": [],
+      "groups": [],
+      "id": "8723",
+      "banner": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
+      "avatar": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
+      "created_at": "17/9/2024",
+      "status": false
     }
   ],
   "posts": [
@@ -324,6 +132,7 @@
       "id": "2e18ed40-d1d8-42e7-9dec-7c48e2fcb5bf",
       "title": "111",
       "idUser": "7621",
+      "status": true,
       "carouselMedia": [
         {
           "index": 1,
@@ -339,6 +148,7 @@
       "id": "94d3618d-edac-4fd0-91f4-c20834db4a30",
       "title": "3333",
       "idUser": "7621",
+      "status": true,
       "carouselMedia": [
         {
           "index": 1,
@@ -359,6 +169,156 @@
         "fded557f-bb79-4725-8529-e127a1cb5cae",
         "83ad5301-bbc1-4e1e-9f75-fa565ce87f9a"
       ]
+    },
+    {
+      "id": "ffe92d0a-3456-48d1-bc2e-f60a75b24cf3",
+      "title": "090980igjkk",
+      "idUser": "7621",
+      "status": true,
+      "carouselMedia": [
+        {
+          "index": 1,
+          "mediaUrl": "https://firebasestorage.googleapis.com/v0/b/online-social-bafa3.appspot.com/o/images%2Fimage-1726527634733.jpg?alt=media&token=582f818a-1fb8-4f7a-9a1d-8609824a8d75",
+          "type": "image"
+        },
+        {
+          "index": 2,
+          "mediaUrl": "https://firebasestorage.googleapis.com/v0/b/online-social-bafa3.appspot.com/o/images%2Fimage-1726527634733.jpg?alt=media&token=5e25fc24-626b-401b-b427-09296f71eec0",
+          "type": "image"
+        }
+      ],
+      "createdAt": 1726527635846,
+      "likeCount": 0,
+      "commentsById": []
+    },
+    {
+      "id": "0e1ccfb9-0061-442b-b5c5-342390bd98f4",
+      "title": "1222222222222222222222222222",
+      "idUser": "7621",
+      "status": true,
+      "carouselMedia": [
+        {
+          "index": 1,
+          "mediaUrl": "https://firebasestorage.googleapis.com/v0/b/online-social-bafa3.appspot.com/o/images%2Fimage-1726527902660.jpg?alt=media&token=fdb758da-3330-4504-8fac-e1cc15385c95",
+          "type": "image"
+        }
+      ],
+      "createdAt": 1726527903408,
+      "likeCount": 0,
+      "commentsById": []
+    },
+    {
+      "id": "b89cd2d7-1712-4ad5-b93a-634bbe6c1885",
+      "title": "p",
+      "idUser": "7621",
+      "status": true,
+      "carouselMedia": [
+        {
+          "index": 1,
+          "mediaUrl": "https://firebasestorage.googleapis.com/v0/b/online-social-bafa3.appspot.com/o/images%2Fimage-1726528001913.jpg?alt=media&token=282b4f77-85f5-43bb-8c14-155526179f90",
+          "type": "image"
+        }
+      ],
+      "createdAt": 1726528002461,
+      "likeCount": 0,
+      "commentsById": []
+    },
+    {
+      "id": "8707ec73-e3dc-4c82-b9c1-92ca0d6c2b42",
+      "title": ";;",
+      "idUser": "7621",
+      "status": true,
+      "carouselMedia": [
+        {
+          "index": 1,
+          "mediaUrl": "https://firebasestorage.googleapis.com/v0/b/online-social-bafa3.appspot.com/o/images%2Fimage-1726528111606.jpg?alt=media&token=bd4337a8-bf5f-4e18-977e-306126a44c81",
+          "type": "image"
+        }
+      ],
+      "createdAt": 1726528112358,
+      "likeCount": 0,
+      "commentsById": []
+    },
+    {
+      "id": "e6aa3f43-21c7-484c-93bb-24659c04467a",
+      "title": "ff",
+      "idUser": "7621",
+      "status": true,
+      "carouselMedia": [
+        {
+          "index": 1,
+          "mediaUrl": "https://firebasestorage.googleapis.com/v0/b/online-social-bafa3.appspot.com/o/images%2Fimage-1726528845404.jpg?alt=media&token=70999e66-b1fb-4558-9152-1082b36ad56d",
+          "type": "image"
+        }
+      ],
+      "createdAt": 1726528846201,
+      "likeCount": 0,
+      "commentsById": []
+    },
+    {
+      "id": "06383c22-c9d6-465d-8a37-c3b9797f79c0",
+      "title": "1111",
+      "idUser": "7621",
+      "status": true,
+      "carouselMedia": [
+        {
+          "index": 1,
+          "mediaUrl": "https://firebasestorage.googleapis.com/v0/b/online-social-bafa3.appspot.com/o/images%2Fimage-1726531616790.jpg?alt=media&token=d47717c5-5f77-4eb7-bb36-78cbbbe60bc9",
+          "type": "image"
+        }
+      ],
+      "createdAt": 1726531617614,
+      "likeCount": 0,
+      "commentsById": []
+    },
+    {
+      "id": "8c358be4-24ad-47ec-abc0-025d161ce18f",
+      "title": "demoooooooooooooooooooooooo",
+      "idUser": "4744",
+      "carouselMedia": [
+        {
+          "index": 1,
+          "mediaUrl": "https://firebasestorage.googleapis.com/v0/b/online-social-bafa3.appspot.com/o/images%2Fimage-1726542243880.jpg?alt=media&token=292af3c7-8e02-4657-a228-b7d5ad8ba904",
+          "type": "image"
+        },
+        {
+          "index": 2,
+          "mediaUrl": "https://firebasestorage.googleapis.com/v0/b/online-social-bafa3.appspot.com/o/images%2Fimage-1726542243931.jpg?alt=media&token=622a17d0-b243-4097-9226-b9cbab124d4f",
+          "type": "image"
+        },
+        {
+          "index": 3,
+          "mediaUrl": "https://firebasestorage.googleapis.com/v0/b/online-social-bafa3.appspot.com/o/images%2Fimage-1726542243930.jpg?alt=media&token=0c9fd7bd-1d05-4ffb-a2e0-800fdf4800e3",
+          "type": "image"
+        }
+      ],
+      "createdAt": 1726542245256,
+      "likeCount": 0,
+      "commentsById": [
+        "cc138e02-91c5-480e-a7ee-e5181f8439ab"
+      ],
+      "status": true
+    },
+    {
+      "id": "56318a59-7704-4318-8be8-af17dd177ec3",
+      "title": "adsasd",
+      "idUser": "4744",
+      "carouselMedia": [
+        {
+          "index": 1,
+          "mediaUrl": "https://firebasestorage.googleapis.com/v0/b/online-social-bafa3.appspot.com/o/images%2Fimage-1726553848095.jpg?alt=media&token=1ef70771-665a-456f-a9cc-2bc4fd8740c2",
+          "type": "image"
+        },
+        {
+          "index": 2,
+          "mediaUrl": "https://firebasestorage.googleapis.com/v0/b/online-social-bafa3.appspot.com/o/images%2Fimage-1726553848095.jpg?alt=media&token=7bab7086-a0d8-4136-9091-a3126a4292cb",
+          "type": "image"
+        }
+      ],
+      "createdAt": 1726553849087,
+      "likeCount": 0,
+      "commentsById": [],
+      "status": true
     }
   ],
   "commentsChild": [
@@ -372,71 +332,31 @@
       "userNameParent": "dung123",
       "detail": "@dung123 ",
       "date": 1726494127214
+    },
+    {
+      "id": "5818591e-e895-4681-91cc-45cb42217a3d",
+      "idUser": "4744",
+      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/online-social-bafa3.appspot.com/o/profile-pictures%2F1.jpg?alt=media&token=72927294-8e4d-4c22-9bb4-0a013942ff60",
+      "userNameUser": "dungdemo",
+      "postId": "8c358be4-24ad-47ec-abc0-025d161ce18f",
+      "idParent": "cc138e02-91c5-480e-a7ee-e5181f8439ab",
+      "userNameParent": "dungdemo",
+      "detail": "@dungdemo 12123",
+      "date": 1726553615412
+    },
+    {
+      "id": "4a5f8e66-635b-4e63-889b-dbc47bc7b034",
+      "idUser": "4744",
+      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/online-social-bafa3.appspot.com/o/profile-pictures%2F3.jpg?alt=media&token=99a92337-b86f-4cd4-8825-dca6bc1466a5",
+      "userNameUser": "dungdemo",
+      "postId": "94d3618d-edac-4fd0-91f4-c20834db4a30",
+      "idParent": "6a54b777-0fd1-46eb-aba0-4b9405fe1482",
+      "userNameParent": "dung123",
+      "detail": "@dung123 qweqw",
+      "date": 1726554313665
     }
   ],
   "commentsParent": [
-    {
-      "id": "c31e4370-afa4-44f1-a6ee-b41ebad5c6db",
-      "idUser": "7621",
-      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
-      "userNameUser": "dung123",
-      "postId": "",
-      "detail": "12332",
-      "date": 1726487087834,
-      "commentsById": []
-    },
-    {
-      "id": "399927d4-3514-42ba-9e00-199959eaf85a",
-      "idUser": "7621",
-      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
-      "userNameUser": "dung123",
-      "postId": "",
-      "detail": "123",
-      "date": 1726487393726,
-      "commentsById": []
-    },
-    {
-      "id": "835e813c-a3ed-48d8-af61-227dd47568d3",
-      "idUser": "7621",
-      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
-      "userNameUser": "dung123",
-      "postId": "",
-      "detail": "123123",
-      "date": 1726487396443,
-      "commentsById": []
-    },
-    {
-      "id": "5094a027-918e-4935-a85f-05cbe8fbe2ba",
-      "idUser": "7621",
-      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
-      "userNameUser": "dung123",
-      "postId": "",
-      "detail": "123123",
-      "date": 1726487762301,
-      "commentsById": []
-    },
-    {
-      "id": "2a583c89-eb48-44fd-89ad-9b55122b9af2",
-      "idUser": "7621",
-      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
-      "userNameUser": "dung123",
-      "postId": "",
-      "detail": "3232",
-      "date": 1726487791362,
-      "commentsById": []
-    },
-    {
-      "id": "ddf55c9c-b64a-4102-9889-69d1bc313ea1",
-      "idUser": "7621",
-      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/e-commerce-60acc.appspot.com/o/img%2FClone.jfif?alt=media&token=fc772ba1-bc74-4b05-878f-ab123957a878",
-      "userNameUser": "dung123",
-      "postId": "",
-      "detail": "123",
-      "date": 1726487864019,
-      "commentsById": [
-        "91024eee-89be-41d2-a495-7594f8f2e8aa"
-      ]
-    },
     {
       "id": "bca14168-3b13-4b5b-b79f-88509896f5f9",
       "idUser": "7621",
@@ -465,7 +385,9 @@
       "postId": "94d3618d-edac-4fd0-91f4-c20834db4a30",
       "detail": "123",
       "date": 1726489107565,
-      "commentsById": []
+      "commentsById": [
+        "4a5f8e66-635b-4e63-889b-dbc47bc7b034"
+      ]
     },
     {
       "id": "2b3a71e0-2306-48c3-bb80-ae6368a23dfe",
@@ -616,6 +538,38 @@
       "detail": "99999",
       "date": 1726492502094,
       "commentsById": []
+    },
+    {
+      "id": "a9a7d54a-ccad-4f4c-a171-e9dcd9189d46",
+      "idUser": "4744",
+      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/online-social-bafa3.appspot.com/o/profile-pictures%2F1.jpg?alt=media&token=72927294-8e4d-4c22-9bb4-0a013942ff60",
+      "userNameUser": "dungdemo",
+      "postId": "8c358be4-24ad-47ec-abc0-025d161ce18f",
+      "detail": "dmewq",
+      "date": 1726553602764,
+      "commentsById": []
+    },
+    {
+      "id": "e7692aa2-ec6b-48fb-b32e-c70861fcdba2",
+      "idUser": "4744",
+      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/online-social-bafa3.appspot.com/o/profile-pictures%2F1.jpg?alt=media&token=72927294-8e4d-4c22-9bb4-0a013942ff60",
+      "userNameUser": "dungdemo",
+      "postId": "8c358be4-24ad-47ec-abc0-025d161ce18f",
+      "detail": "aasdasd",
+      "date": 1726553605594,
+      "commentsById": []
+    },
+    {
+      "id": "cc138e02-91c5-480e-a7ee-e5181f8439ab",
+      "idUser": "4744",
+      "avatarUser": "https://firebasestorage.googleapis.com/v0/b/online-social-bafa3.appspot.com/o/profile-pictures%2F1.jpg?alt=media&token=72927294-8e4d-4c22-9bb4-0a013942ff60",
+      "userNameUser": "dungdemo",
+      "postId": "8c358be4-24ad-47ec-abc0-025d161ce18f",
+      "detail": "qw",
+      "date": 1726553609296,
+      "commentsById": [
+        "5818591e-e895-4681-91cc-45cb42217a3d"
+      ]
     }
   ]
 }

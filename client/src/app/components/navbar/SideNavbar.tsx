@@ -30,7 +30,6 @@ import {PostEditModal} from "../modal/PostEditModal"; // Import thêm PostEditMo
 const SideNavbar = () => {
   const router = useRouter();
   const [activeNavBar, setActiveNavBar] = useState<string | undefined>(undefined);
-  const [isMoreModalOpen, setIsMoreModalOpen] = useState(true);
   const [isNavBarCollapsed, setIsNavBarCollapsed] = useState(false);
   const [currentUser, setCurrentUser] = useState<User | undefined>(undefined);
   const dispatch = useDispatch();
@@ -85,9 +84,12 @@ const SideNavbar = () => {
     }
   }, [router]);
 
-  const toggleMoreModal = () => {
-    setIsMoreModalOpen(!isMoreModalOpen);
+  const logout = () => {
+    localStorage.removeItem('currentUser');
+    localStorage.removeItem('currentUserId');
+      router.push("/login");
   };
+
 
   const menuItems = [
     { title: "Home", path: "/home", name: "home", icon: faHome },
@@ -114,28 +116,11 @@ const SideNavbar = () => {
       name: "profile",
       img: userProfileImg,
     },
+    { title: "Log Out", icon: faSignOut,
+      onClick:  logout },
   ];
 
-  const settings = [
-    { name: "Settings", icon: faGear, action: () => router.push("/settings") },
-    {
-      name: "Your activity",
-      icon: faClockRotateLeft,
-      action: () => router.push("/activity"),
-    },
-    { name: "Saved", icon: faBookmark, action: () => {} },
-    { name: "Switch Appearance", icon: faMoon, action: () => {} },
-    { name: "Report a problem", icon: faExclamationTriangle, action: () => {} },
-    { name: "Switch accounts", icon: faUserCircle, action: () => {} },
-    { name: "Log Out", icon: faSignOut, action: () => logout() },
-  ];
 
-  const logout = () => {
-    console.log("Logout successful");
-    setTimeout(() => {
-      router.push("/login");
-    }, 2000);
-  };
 
   return (
     <> 
@@ -161,7 +146,7 @@ const SideNavbar = () => {
           <div className={`p-4 rounded-lg flex cursor-pointer justify-center ${!isNavBarCollapsed ? "xl:justify-start" : ""}`}>
             {!isNavBarCollapsed && (
               <div className="xl:block hidden p-2 pt-7">
-                <Image src="/assets/images/icon-dark.png" alt="Icon" width={128} height={28} />
+                <img src="https://th.bing.com/th/id/R.26d9974a1feec9905a4e0d5e5ddf8db6?rik=Og1ujXM2C1AJHQ&riu=http%3a%2f%2fupload.wikimedia.org%2fwikipedia%2fcommons%2fa%2fa5%2fInstagram_icon.png&ehk=1%2fZWXYn2nN%2fR80TOtcKH5SsdLkkUvMLrB%2fHUXRDHk9I%3d&risl=&pid=ImgRaw&r=0" alt="Icon" width={30} height={28} />
               </div>
             )}
             <div className={isNavBarCollapsed ? "block pt-5" : "xl:hidden block"}>
@@ -189,28 +174,6 @@ const SideNavbar = () => {
             ))}
           </div>
         </div>
-
-        {/* More Settings */}
-        <div onClick={toggleMoreModal} className="cursor-pointer rounded-full flex space-x-4 p-5 sm:hover:bg-slate-1000 sm:hover:delay-100">
-          <FontAwesomeIcon icon={faEllipsisH} />
-          <span className={`${isNavBarCollapsed ? "xl:hidden" : "block"} font-sans text-md font-semibold text-white`}>
-            More
-          </span>
-        </div>
-
-        {/* Modal More Settings */}
-        {!isMoreModalOpen && (
-          <div className="bg-black rounded-lg absolute max-w-xs top-2/4 left-1/2 transform translate-y-1/4 -translate-x-1/2">
-            <div className="flex flex-col m-1 max-h-full overflow-y-scroll">
-              {settings.map((item, index) => (
-                <div key={index} className="flex p-3 rounded-xl space-x-3 hover:bg-slate-200" onClick={item.action}>
-                  <FontAwesomeIcon icon={item.icon} />
-                  <p className="text-white">{item.name}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
     </>
   );

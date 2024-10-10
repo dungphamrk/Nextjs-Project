@@ -1,45 +1,76 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
+import { User } from "@/app/interfaces/types";
+import { getAllPost } from "@/app/store/reducers/postsSlice";
+import { getAllUser, UserState } from "@/app/store/reducers/userSlice";
+import { useRouter } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const RightNavbar: React.FC = () => {
-  const goToUserProfile = (userName: string) => {
-    // Navigation logic for going to user profile (replace with actual logic)
-    console.log(`Go to ${userName}'s profile`);
+  const router = useRouter();
+  const users = useSelector((state: { users: UserState }) => state.users.users);
+  const [currentUser, setCurrentUser] = useState<User | undefined>(undefined);
+ const dispatch= useDispatch();
+  const goToUserProfile = (id: string | undefined) => {
+    router.push(`/profile/${id}?isSelf=0`);
   };
+  useEffect(()=>{
+    dispatch(getAllUser())
+  },[])
+  const getRandomUsers = (users: User[], count: number) => {
+  const shuffled = [...users].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count);
+}; 
+useEffect(() => {
+  const userId = localStorage.getItem("currentUserId");
+  if (userId) {
+    const findId = JSON.parse(userId);
+    const findedUser = users.find((user) => user?.id == findId);
+    setCurrentUser(findedUser);
+  }
+}, [users]);
+
+const randomUsers = useMemo(() => {
+  if (users.length > 0) {
+    const filteredUsers = currentUser
+      ? users.filter(user => user.id !== currentUser.id)
+      : users;
+    return getRandomUsers(filteredUsers, 5);
+  }
+  return [];
+}, [users, currentUser]);
 
   return (
-    
     <div className="flex flex-col space-y-4 flex-nowrap top-0 max-w-sm pr-10">
       {/* A: Current User Data */}
-      <div 
+      <div
         className="rounded-lg flex items-center space-x-2 cursor-pointer"
-        onClick={() => goToUserProfile('john_doe')}
+        onClick={() => goToUserProfile(`${currentUser?.id}`)}
       >
-        <div className="flex-inital">
+        <div className="flex-initial">
           <img
-            src="https://tiki.vn/blog/wp-content/uploads/2023/01/oLkoHpw9cqRtLPTbg67bgtUvUdV1BnXRnAqqBZOVkEtPgf-_Ct3ADFJYXIjfDd0fTyECLEsWq5yZ2CCOEGxIsuHSmNNNUZQcnQT5-Ld6yoK19Q_Sphb0MmX64ga-O_TIPjItNkTL5ns4zqP1Z0OBzsIoeYKtcewnrjnVsw8vfG8uYwwCDkXaoozCrmH1kA.jpg" // Sử dụng hình ảnh tĩnh
-            alt="john_doe's profile picture"
+            src={currentUser?.avatar} // Use the actual URL for the profile picture
+            alt={`${currentUser?.name}'s profile picture`} // Dynamic alt text
             width={44}
             height={44}
             className="w-11 h-11 rounded-full"
           />
         </div>
 
-        <div className="flex-inital">
+        <div className="flex-initial">
           <span className="font-sans text-sm font-semibold text-white">
-            john_doe
+            {currentUser?.name} 
           </span>
         </div>
 
-        <div className="flex-inital grow grid">
+        <div className="flex-initial grow grid">
           <span className="font-sans text-xs text-sky-500 justify-self-end">
             Switch
           </span>
         </div>
       </div>
 
-      {/* B.1 */}
       <div className="rounded-lg flex items-center space-x-2">
         <div className="flex-inital">
           <span className="font-sans text-sm font-semibold text-gray-400">
@@ -53,27 +84,18 @@ const RightNavbar: React.FC = () => {
         </div>
       </div>
 
-      {/* B.2: Suggested Users Data */}
-      {[{
-        userName: 'jane_doe',
-        profilePictureUrl: 'https://tiki.vn/blog/wp-content/uploads/2023/01/oLkoHpw9cqRtLPTbg67bgtUvUdV1BnXRnAqqBZOVkEtPgf-_Ct3ADFJYXIjfDd0fTyECLEsWq5yZ2CCOEGxIsuHSmNNNUZQcnQT5-Ld6yoK19Q_Sphb0MmX64ga-O_TIPjItNkTL5ns4zqP1Z0OBzsIoeYKtcewnrjnVsw8vfG8uYwwCDkXaoozCrmH1kA.jpg',
-        followedBy: 'mark_smith'
-      }, {
-        userName: 'alex_smith',
-        profilePictureUrl: 'https://tiki.vn/blog/wp-content/uploads/2023/01/oLkoHpw9cqRtLPTbg67bgtUvUdV1BnXRnAqqBZOVkEtPgf-_Ct3ADFJYXIjfDd0fTyECLEsWq5yZ2CCOEGxIsuHSmNNNUZQcnQT5-Ld6yoK19Q_Sphb0MmX64ga-O_TIPjItNkTL5ns4zqP1Z0OBzsIoeYKtcewnrjnVsw8vfG8uYwwCDkXaoozCrmH1kA.jpg',
-        followedBy: 'jane_doe'
-      }].map((suggest, index) => (
-        <div 
-          key={index} 
-          className="flex flex-col" 
-          onClick={() => goToUserProfile(suggest.userName)}
+      {randomUsers.map((suggest, index) => (
+        <div
+          key={index}
+          className="flex flex-col"
+          onClick={() => goToUserProfile(suggest.id)}
         >
           {/* Suggested Card */}
           <div className="rounded-lg flex items-center space-x-2 w-80 h-12 cursor-pointer">
             <div className="flex-inital">
               <img
-                src={suggest.profilePictureUrl}
-                alt={`${suggest.userName}'s profile picture`}
+                src={suggest.avatar}
+                alt={`${suggest.name}'s profile picture`}
                 width={32}
                 height={32}
                 className="w-8 h-8 rounded-full"
@@ -82,11 +104,9 @@ const RightNavbar: React.FC = () => {
 
             <div className="flex flex-inital flex-col">
               <span className="font-sans text-sm font-semibold text-white self-start">
-                {suggest.userName}
+                {suggest.name}
               </span>
-              <span className="font-sans text-xs font-semibold text-gray-400 self-start">
-                Followed by {suggest.followedBy}
-              </span>
+     
             </div>
 
             <div className="flex-inital grow grid">
@@ -98,7 +118,6 @@ const RightNavbar: React.FC = () => {
         </div>
       ))}
 
-      {/* C */}
       <div className="flex list-disc space-x-4 font-sans text-xs font-semibold text-gray-500 self-start flex-wrap">
         <li className="list-none">About</li>
         <li>Help</li>
@@ -109,11 +128,6 @@ const RightNavbar: React.FC = () => {
         <li>Terms</li>
         <li>Locations</li>
         <li>Language</li>
-      </div>
-
-      {/* D */}
-      <div className="flex font-sans text-xs font-semibold text-gray-500 self-start">
-        <span>© 2023 PHOTOFLOW</span>
       </div>
     </div>
   );

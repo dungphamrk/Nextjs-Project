@@ -29,7 +29,6 @@ export default function Register() {
   });
   const dispatch = useDispatch();
   const [errors, setErrors] = useState<Partial<FormData>>({});
-
   const checkUnique = async (): Promise<Partial<FormData>> => {
     const newErrors: Partial<FormData> = {};
     try {
@@ -96,6 +95,7 @@ export default function Register() {
         follows:[],
         hasLiked:[],
         savedPost:[],
+        role:false,
         hasBookmarked:[],
         groups:[],
         id: Math.floor(Math.random() * 10000).toString(), // Random id for demo purposes
@@ -107,7 +107,7 @@ export default function Register() {
       
       dispatch(registerUser(user as User));
       swal("Welcome", "Đăng kí thành công", "success");
-      
+      router.push("/login")
     } else {
       swal("Lỗi", "Vui lòng kiểm tra lại thông tin đăng ký", "error");
     }

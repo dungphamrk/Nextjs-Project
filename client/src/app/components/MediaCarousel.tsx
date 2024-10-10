@@ -22,7 +22,7 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({ mediaItems }) => {
   const handleNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex === mediaItems.length - 1 ? 0 : prevIndex + 1));
   };
-
+  
   const currentMedia = mediaItems[currentIndex];
 
   return (
@@ -36,7 +36,7 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({ mediaItems }) => {
       </button>) : ""} 
       <div className="flex justify-center items-center overflow-hidden relative">
         {currentMedia.type === 'image' ? (
-          <img src={currentMedia.mediaUrl}  className="w-full h-full" />
+          <img key={currentMedia.mediaUrl} src={currentMedia.mediaUrl}  className="w-full h-full" />
         ) : (
           <video src={currentMedia.mediaUrl} controls className="w-full h-full">
             Your browser does not support the video tag.

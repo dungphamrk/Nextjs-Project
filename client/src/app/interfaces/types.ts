@@ -96,6 +96,7 @@ export interface PostCard {
   carouselMedia?: PostMedia[];
   createdAt: number;
   likeCount: number;
+  status:boolean;
   commentsById: string[];
 }
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CommentChild, CommentParent, PostCard, User } from "@/app/interfaces/types";
 import axios from "axios";
-import { addPost } from "@/app/store/reducers/postsSlice";
+import { addPost, deletePost } from "@/app/store/reducers/postsSlice";
 import { v4 as uuidv4 } from "uuid";
 import {
   addNewCommentParent,
@@ -18,8 +18,11 @@ import { convertTime } from "@/app/interfaces/convertTime";
 import { useRouter } from "next/navigation";
 import MediaCarousel from "../MediaCarousel";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faX } from "@fortawesome/free-solid-svg-icons";
+import { faEllipsisH, faX } from "@fortawesome/free-solid-svg-icons";
 import { getAllUser, UserState } from "@/app/store/reducers/userSlice";
+import UpdatePostModal from "./UpdatePostModal";
+import { PostEditModal } from "./PostEditModal";
+import Swal from "sweetalert2";
 interface Props {
   isToggled: boolean;
   activePost: PostCard;
@@ -49,6 +52,8 @@ export  const  CommentModal: React.FC<Props> =({
     status: true,
     private: true,
   });
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState<boolean>(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
   const router = useRouter();
   const [visibleComments, setVisibleComment] = useState<any>({});
   const [idCommentViewMore, setIdCommentViewMore] = useState<string>("");
@@ -76,33 +81,27 @@ export  const  CommentModal: React.FC<Props> =({
     setUser(users.find((item) => activePost?.idUser === item.id));
     
   }, [activePost?.idUser, users]);
-  console.log(commentsParent);
   
   //get CommentParent from API
   useEffect(() => {
     dispatch(getAllUser());
-    dispatch(getCommentsParent());
+    dispatch(getCommentsParent());  
+      dispatch(getCommentsChild());
   }, []);
   //get CommentChild from API
   useEffect(() => {
-    dispatch(getCommentsChild());
-  }, []);
-  //get CommentParent of Post
-  useEffect(() => {
     if (activePost) {
       const fetchCommentsParent = async () => {
-        // Tìm các bình luận cha liên quan đến activePost từ Redux store
         let newCommentsParent: CommentParent[] = activePost.commentsById
-          .map((btn) => commentsParent.find((item: CommentParent) => item.id === btn))
-          .filter((comment) => comment !== undefined) as CommentParent[];
-  
-        // Cập nhật state cục bộ để render bình luận ngay
+          ?.map((btn) => commentsParent.find((item: CommentParent) => item.id === btn))
+          ?.filter((comment) => comment !== undefined) as CommentParent[];
         setCommentsParentUser(newCommentsParent);
       };
   
       fetchCommentsParent();
     }
-  }, [activePost, commentsParent]);  // Thêm activePost vào dependencies
+  }, [activePost, commentsParent]);
+  
   
   //get CommentsChild of Post
   const commentsChildUser = (comments: string[]) => {
@@ -221,6 +220,49 @@ export  const  CommentModal: React.FC<Props> =({
   if (!isToggled) {
     return null; // Modal will not render if isToggled is false
   }
+
+
+  const handleOpenUpdateModal = () => {
+    setIsUpdateModalOpen(true);
+  };
+
+  const handleCloseUpdateModal = () => {
+    setIsUpdateModalOpen(false);
+  };
+
+
+  const handleOpenEditModal =()=>{
+    setIsEditModalOpen(true);
+  } 
+   const handleCloseEditModal =()=>{
+    setIsEditModalOpen(false);
+  }
+  const handleDeletePost = () => {
+    Swal.fire({
+      title: "Bài viết này sẽ bị xóa?",
+      text: "Hành động này sẽ ko được khôi phục!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deletePost(activePost.id));
+        Swal.fire({
+          title: "Deleted!",
+          text: "Bài viết đã bị xáo.",
+          icon: "success"
+        });
+      }
+    });
+  };
+
+
+
+  const handleCheckIsCreater = ()=>{
+    return activePost?.idUser==currentUser?.id;
+  }
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">
   <div className="modal-overlay fixed inset-0 bg-black opacity-50"  onClick={onClose}> 
@@ -231,9 +273,6 @@ export  const  CommentModal: React.FC<Props> =({
         </div>
       </div>
   <div className="modal text-white bg-black p-6 rounded-md relative z-10 max-w-7xl  w-full  flex">
-
-
-
     {/* Left Section: Slider Image/Video */}
     <div className="w-full h-full p-4 flex justify-center items-center">
       {activePost && activePost.carouselMedia && (
@@ -254,13 +293,17 @@ export  const  CommentModal: React.FC<Props> =({
             onClick={() => router.push(`/user/${user.id}`)}
             className="ml-2 cursor-pointer"
           >
-            {user?.username}
+            {user?.name}
           </span>
+          <div className="text-gray-500 w-5 font-sans text-md font-semibold self-center px-2">
+              •
+            </div>
+            <div className="font-sans text-sm font-light text-[#949494] self-center">
+              { convertTime((new Date().getTime()-activePost?.createdAt)/60000)}
+            </div>
         </div>
-        <div className="flex items-center gap-2 cursor-pointer hover:text-gray-400">
-          <div className="w-[3px] h-[3px] bg-gray-600 rounded-full"></div>
-          <div className="w-[3px] h-[3px] bg-gray-600 rounded-full"></div>
-          <div className="w-[3px] h-[3px] bg-gray-600 rounded-full"></div>
+        <div  onClick={handleOpenUpdateModal} className="cursor-pointer self-end">
+          <FontAwesomeIcon icon={faEllipsisH} />
         </div>
       </div>
 
@@ -268,7 +311,7 @@ export  const  CommentModal: React.FC<Props> =({
 
       {/* Comments Section */}
       <div className="all-comment flex flex-col gap-4 overflow-auto max-h-[400px]">
-        {commentsParentUser.length === 0 && (
+        {commentsParentUser?.length === 0 && (
           <div className="text-orange-400 font-bold text-center text-opacity-90 italic">
             Chưa có bình luận nào cho bài viết này!
           </div>
@@ -355,16 +398,14 @@ export  const  CommentModal: React.FC<Props> =({
           </div>
         ))}
       </div>
-
       <hr />
-
       {/* Comment Input */}
       <form className="flex items-center justify-between gap-2">
         <textarea
           onKeyDown={handleKeyDown}
           onChange={handleChangeComment}
           value={valueComment}
-          className="resize-none text-sm placeholder:italic placeholder:text-slate-900 block w-full border border-slate-300 rounded-md py-2 pl-3 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+          className="text-black resize-none text-sm placeholder:italic placeholder:text-slate-900 block w-full border border-slate-300 rounded-md py-2 pl-3 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
           placeholder="Thêm bình luận"
         />
         <button
@@ -376,6 +417,16 @@ export  const  CommentModal: React.FC<Props> =({
       </form>
     </div>
   </div>
+  {isUpdateModalOpen && (
+        <UpdatePostModal
+          isCreater={handleCheckIsCreater}
+          onClose={handleCloseUpdateModal}
+          onOpenDeleteModal={handleDeletePost}
+          onOpenUploadModal={handleOpenEditModal}
+        />
+      )}
+      {isEditModalOpen &&( <PostEditModal selectedImages={[]}  activePost={activePost} onClose={handleCloseEditModal}/>)}
+  
 </div>
 
   );

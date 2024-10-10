@@ -146,8 +146,6 @@ const PostSlice = createSlice({
       .addCase(
         addPost.fulfilled,
         (state, action: PayloadAction<PostCard>) => {
-          console.log(action.payload);
-          
           state.Posts.push(action.payload);
           state.loading = false;
         }

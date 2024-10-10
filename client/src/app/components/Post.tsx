@@ -17,6 +17,10 @@ import MediaCarousel from "./MediaCarousel";
 import { PostCard, PostMedia, User } from "@/app/interfaces/types";
 import Swal from "sweetalert2";
 import { convertTime } from "../interfaces/convertTime";
+import UpdatePostModal from "./modal/UpdatePostModal";
+import { useDispatch } from "react-redux";
+import { deletePost } from "../store/reducers/postsSlice";
+import { PostEditModal } from "./modal/PostEditModal";
 
 interface PostProps {
   post: PostCard;
@@ -26,7 +30,6 @@ interface PostProps {
   onOpenCommentModal: (post: PostCard) => void;
   onPostLike: (user: User) => void;
   onPostBookmark: (user: User) => void; // Callback khi bookmark
-  onPostComment: (comment: string, postId: string) => void;
 }
 
 const Post: React.FC<PostProps> = ({
@@ -37,7 +40,6 @@ const Post: React.FC<PostProps> = ({
   onOpenCommentModal,
   onPostLike,
   onPostBookmark,
-  onPostComment,
 }) => {
   const [comment, setComment] = useState("");
   const [windowWidth, setWindowWidth] = useState(
@@ -48,6 +50,7 @@ const Post: React.FC<PostProps> = ({
       ? currentUser.hasLiked.includes(post.id)
       : false;
   });
+  const dispatch = useDispatch();
   const [hasBookmarked, setHasBookmarked] = useState(() => {
     return currentUser && Array.isArray(currentUser.hasBookmarked)
       ? currentUser.hasBookmarked.includes(post.id)
@@ -108,17 +111,53 @@ const Post: React.FC<PostProps> = ({
     }
   };
 
-  const handleCommentSubmit = () => {
-    onPostComment(comment, post.id);
-    setComment("");
+  const goToUserProfile = (id: string |undefined) => {
+    router.push(`/profile/${id}?isSelf=0`);
+  };
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+  const handleOpenUpdateModal = () => {
+    setIsUpdateModalOpen(true);
+  };
+
+  const handleCloseUpdateModal = () => {
+    setIsUpdateModalOpen(false);
+  };
+
+
+  const handleOpenEditModal =()=>{
+    setIsEditModalOpen(true);
+  } 
+   const handleCloseEditModal =()=>{
+    setIsEditModalOpen(false);
+  }
+  const handleDeletePost = () => {
+    Swal.fire({
+      title: "Bài viết này sẽ bị xóa?",
+      text: "Hành động này sẽ ko được khôi phục!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deletePost(post.id));
+        Swal.fire({
+          title: "Deleted!",
+          text: "Bài viết đã bị xáo.",
+          icon: "success"
+        });
+      }
+    });
   };
 
 
 
-  const goToUserProfile = (userName: string |undefined) => {
-    router.push(`/profile/${userName}?isSelf=0`);
-  };
-  
+  const handleCheckIsCreater = ()=>{
+    return post?.idUser==currentUser?.id;
+  }
 
   return (
     <div className="flex flex-col  h-full space-y-2 sm:space-y-0 no-scrollbar">
@@ -126,7 +165,7 @@ const Post: React.FC<PostProps> = ({
       <div className="flex rounded-lg space-x-2 justify-between pb-5">
         <div
           className="flex space-x-2"
-          onClick={() => goToUserProfile( userOfPost?.name)}
+          onClick={() => goToUserProfile( userOfPost?.id)}
         >
           <div className="story-avatar">
             <a href="#" className="block bg-white rounded-full relative">
@@ -148,7 +187,7 @@ const Post: React.FC<PostProps> = ({
             </div>
           </div>
         </div>
-        <div className="cursor-pointer self-end">
+        <div onClick={handleOpenUpdateModal} className="cursor-pointer self-end">
           <FontAwesomeIcon icon={faEllipsisH} />
         </div>
       </div>
@@ -200,31 +239,16 @@ const Post: React.FC<PostProps> = ({
           </p>
         )}
       </div>
-
-      {/* Comment Form */}
-      {isCommentAreaVisible && (
-        <div className="flex border-b border-slate-800 justify-between ">
-          <span className="basis-4/5">
-            <textarea
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-              rows={1}
-              className="outline-none resize-none border-none text-white block w-full text-sm bg-black placeholder:text-gray-1100"
-              placeholder="Add a comment..."
-              onKeyPress={(e) => e.key === "Enter" && handleCommentSubmit()}
-            />
-          </span>
-          {comment.length > 0 && (
-            <span
-              className="font-sans text-md text-sky-500 cursor-pointer hover:text-white h-6"
-              onClick={handleCommentSubmit}
-            >
-              Post
-            </span>
-          )}
-   
-        </div>
+      {isUpdateModalOpen && (
+        <UpdatePostModal
+          isCreater={handleCheckIsCreater}
+          onClose={handleCloseUpdateModal}
+          onOpenDeleteModal={handleDeletePost}
+          onOpenUploadModal={handleOpenEditModal}
+        />
       )}
+      {isEditModalOpen &&( <PostEditModal selectedImages={[]}  activePost={post} onClose={handleCloseEditModal}/>)}
+  
     </div>
   );
 };

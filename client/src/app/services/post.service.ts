@@ -3,11 +3,13 @@ import axios from 'axios';
 import { PostCard } from '../interfaces/types'; // Import interface Post (nếu có)
 
 const API_URL = 'http://localhost:5000/posts'; // Thay đổi URL API của bạn tại đây
-
+function sortPostsByDate(posts: PostCard[]): PostCard[] {
+  return posts.sort((a, b) => b.createdAt - a.createdAt);
+}
 export const PostService = {
   async getAllPost(): Promise<PostCard> {
     const response = await axios.get<PostCard>(API_URL);
-    return response.data;
+    return  response.data;
   },
   async getPostById(id: string): Promise<PostCard> {
     const response = await axios.get<PostCard>(`${API_URL}/${id}`);

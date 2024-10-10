@@ -93,7 +93,7 @@ export default function UserInfor({ params }: { params: { id: string } }) {
                 const updatedUser = { ...formData, avatar: downloadURL };
                 axios
                   .put(
-                    `http://localhost:3000/users/${formData.id}`,
+                    `http://localhost:5000/users/${formData.id}`,
                     updatedUser
                   )
                   .then(() => {
